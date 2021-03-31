@@ -50,7 +50,6 @@ class User extends Authenticatable
     public function assignRole($role)
     {
         if (is_string($role)) {
-
             $role = Role::whereName($role)->firstOrFail();
         }
 
@@ -71,5 +70,4 @@ class User extends Authenticatable
     {
         return "https://i.pravatar.cc/40?u=" . $this->email;
     }
-
 }
