@@ -13,23 +13,9 @@ use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    public function index()
-    {
-        $roles = Role::all();
-        $users = User::all();
-
-        $admins = User::whereHas('roles', function ($admin) {
-            $admin->where('role_id', 1);
-        })->get();
-
-        return view('admin.dashboard', compact('users', 'admins', 'roles'));
-
     }
 
     public function alldata()
@@ -50,15 +36,25 @@ class AdminController extends Controller
             $user->where('role_id', 3);
         })->get();
 
-        return view('admin.index', compact('users', 'reg_users', 'admins', 'authors', 'roles', 'articles'));
 
+        return view('admin.dashboard', compact('users', 'reg_users', 'admins', 'authors', 'roles', 'articles'));
+    }
+
+    public function index()
+    {
+        $roles = Role::all();
+        $users = User::all();
+        $admins = User::whereHas('roles', function ($admin) {
+            $admin->where('role_id', 1);
+        })->get();
+
+        return view('admin.index', compact('users', 'admins', 'roles'));
     }
 
     public function create()
     {
         $roles = Role::all();
         return view('admin.create', compact('roles'));
-
     }
 
     public function store(Request $request)
@@ -73,14 +69,10 @@ class AdminController extends Controller
         $profile = $request->file(['profile']);
 
         if (isset($profile)) {
-
             $profile_name = $profile->getClientOriginalName();
             $profile->storeAs('public/', $profile_name);
-
         } else {
-
-            $profile_name = "noimage.jpg";
-
+            $profile_name = 'noimage.jpg';
         }
 
         $user = new User();
@@ -99,7 +91,6 @@ class AdminController extends Controller
         }
 
         return redirect(route('admin.users'));
-
     }
 
     public function show($id)
@@ -111,9 +102,9 @@ class AdminController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        dd($request->all());
         $user = User::findOrFail($id);
-
+        abort_if($user->isNot(auth()->user()), 404) ;
         $profile = $request->file(['profile']);
 
         if (!isset($profile)) {
@@ -136,7 +127,6 @@ class AdminController extends Controller
         $user->save();
 
         return redirect()->back();
-
     }
 
     public function delete($id)
@@ -146,7 +136,8 @@ class AdminController extends Controller
 
         return back();
     }
-    #Articles
+
+    //Articles
     public function articles()
     {
         if (request('category')) {
@@ -162,8 +153,8 @@ class AdminController extends Controller
         $categories = Category::all();
         $authors = User::where('role_id', 2);
         return view('admin/articles/create', compact('categories', 'authors'));
-
     }
+
     public function storeArtiles(Request $request)
     {
         $this->validateArticle();
@@ -177,8 +168,8 @@ class AdminController extends Controller
         $articles->categories()->attach(request('categories'));
 
         return redirect(url('admin/articles'));
-
     }
+
     public function editArticles($id)
     {
         $categories = Category::all();
@@ -200,15 +191,15 @@ class AdminController extends Controller
 
         return redirect('admin/articles/');
     }
+
     public function deleteArticles($id)
     {
         $article = Article::find($id);
         $article->delete();
         return redirect()->back()->with('info', 'Article Has Been Deleted');
-
     }
 
-    #Category
+    //Category
     public function categories()
     {
         $categories = Category::withCount('articles')->latest()->paginate(5);
@@ -217,7 +208,6 @@ class AdminController extends Controller
 
     public function storeCategory(Request $request)
     {
-
         request()->validate([
             'category_name' => ['required', 'unique:categories'],
         ]);
@@ -233,12 +223,10 @@ class AdminController extends Controller
         $category->save();
 
         return back()->with('msg', 'Your Data Is Added!');
-
     }
 
     public function updateCategory($id)
     {
-
         $category = Category::find($id);
         $category->category_name = request('category_name');
         $category->slug = Str::slug(request('slug'), '-');
@@ -254,18 +242,15 @@ class AdminController extends Controller
         $category->delete();
 
         return redirect()->back();
-
     }
 
     public function validateArticle()
     {
         return request()->validate([
-
             'title' => 'required',
             'excerpt' => 'required',
             'body' => 'required',
             'categories' => 'exists:categories,id',
-
         ]);
     }
 }

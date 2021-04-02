@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-#Article Route
+//Article Route
 Route::get('/', 'ArticleController@index')->name('articles.index');
 Route::get('/articles', 'ArticleController@index');
 Route::post('/articles', 'ArticleController@store');
@@ -13,16 +13,16 @@ Route::get('/articles/edit/{id}', 'ArticleController@edit');
 Route::post('/articles/edit/{id}', 'ArticleController@update');
 Route::get('/articles/delete/{id}', 'ArticleController@delete');
 
-#Caegory Route
+//Caegory Route
 Route::get('/category', 'CategoryController@index')->name('category.index');
 
-#Article Comment Route
+//Article Comment Route
 Route::post('/articles/detail/{article_id}/comment/add', 'CommentController@create');
 Route::get('/comment/edit/{id}', 'CommentController@edit');
 Route::put('/comment/edit/{id}', 'CommentController@update');
 Route::get('/articles/comment/delete/{id}', 'CommentController@delete');
 
-#Member Route
+//Member Route
 Route::get('/authors', 'AuthorController@index')->name('authors');
 Route::post('/authors', 'AuthorController@store');
 Route::get('/authors/create', 'AuthorController@create');
@@ -32,17 +32,16 @@ Route::put('/authors/edit/{id}', 'AuthorController@update');
 Route::get('/authors/delete/{id}', 'AuthorController@delete');
 
 Route::prefix('admin')->group(function () {
-
-    #User
-    Route::get('/', 'AdminController@index')->name('admin');
-    Route::get('/user', 'AdminController@alldata')->name('admin.users');
+    //User
+    Route::get('/', 'AdminController@alldata')->name('dashboard');
+    Route::get('/user', 'AdminController@index')->name('admin.users');
     Route::post('/user', 'AdminController@store');
     Route::get('/user/create', 'AdminController@create')->name('admin.create');
     Route::get('/user/detail/{id}', 'AdminController@show')->name('admin.users.detail');
     Route::put('/user/edit/{id}', 'AdminController@update');
     Route::get('/user/delete/{id}', 'AdminController@delete');
 
-    #Article
+    //Article
     Route::get('/articles', 'AdminController@articles');
     Route::post('/articles/create', 'AdminController@storeArtiles');
     Route::get('/articles/create', 'AdminController@createArticles');
@@ -51,17 +50,15 @@ Route::prefix('admin')->group(function () {
     Route::put('/articles/edit/{id}', 'AdminController@updateArticles');
     Route::get('/articles/delete/{id}', 'AdminController@deleteArticles');
 
-    #Category
+    //Category
     Route::get('/categories', 'AdminController@categories');
     Route::post('/category', 'AdminController@storeCategory');
     Route::get('/category/create', 'AdminController@createCategory');
     Route::put('/category/edit/{id}', 'AdminController@updateCategory');
     Route::get('/category/delete/{id}', 'AdminController@deleteCategory');
-
 });
 
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/member', function () {
         return view('dashboards.member');
     });
@@ -69,7 +66,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user', function () {
         return view('dashboards.user');
     });
-
 });
 
 Auth::routes();

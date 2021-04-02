@@ -12,7 +12,7 @@
             <div class="card-body">
                 <h4 class="card-title">User lists</h4>
                 <h6 class="card-subtitle"></h6>
-                <a href="{{ url('/admin/user/create') }}" type="button" class="btn btn-info btn-rounded m-t-10 text-white float-right" >Add New User</a>
+                <a href="{{ url('/admin/user/create') }}" type="button" class="btn btn-info btn-rounded m-t-10 text-white float-right">Add New User</a>
                 <div class="table-responsive">
                     <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
                         <thead>

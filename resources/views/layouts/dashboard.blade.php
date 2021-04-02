@@ -28,11 +28,15 @@
 
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+
                 <div class="navbar-header">
-                    <a class="text-white" href="{{ url('/admin') }}">
-                        <h3 class="text-center">{{ config('app.name', 'Laravel') }}</h3>
+                    <a class="d-block navbar-brand" href="{{ url('/admin') }}">
+                        <img src="{{ asset('/dashboards/assets/images/logo-icon.png') }} " alt="homepage" class="logoimg" />
+                        <h3 class="mb-0 text-center logotext">{{ config('app.name', 'Laravel') }}</h3>
                     </a>
                 </div>
+
+
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
@@ -42,8 +46,9 @@
                     <!-- ============================================================== -->
                     <ul class="navbar-nav mr-auto">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" onclick="logo()"><i class="icon-menu"></i></a> </li>
+
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
@@ -60,7 +65,7 @@
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="ti-email"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
@@ -112,14 +117,14 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
                         <!-- ============================================================== -->
                         <!-- End Comment -->
                         <!-- ============================================================== -->
                         <!-- ============================================================== -->
                         <!-- Messages -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="icon-note"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
@@ -170,14 +175,14 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
                         <!-- ============================================================== -->
                         <!-- End Messages -->
                         <!-- ============================================================== -->
                         <!-- ============================================================== -->
                         <!-- mega menu -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-layout-width-default"></i></a>
+                        {{-- <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-layout-width-default"></i></a>
                             <div class="dropdown-menu animated bounceInDown">
                                 <ul class="mega-dropdown-menu row">
                                     <li class="col-lg-3 col-xlg-2 m-b-30">
@@ -283,7 +288,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item dropdown u-pro">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('/storage/'.Auth::user()->profile) }}" alt="user" class="img-circle" height="30"> <span class="hidden-md-down">{{ Auth::user()->name }}&nbsp;<i class="fa fa-angle-down"></i></span> </a>
@@ -291,8 +296,14 @@
                                 <!-- text-->
                                 <a href="{{ route('admin.users.detail',['id' => Auth::id()] ) }}" class="dropdown-item"><i class="ti-user"></i> My
                                     Profile</a>
+
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-power-off"></i> Logout
+                                </a>
+
                                 <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My
+                                {{-- <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My
                                     Balance</a>
                                 <!-- text-->
                                 <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
@@ -300,14 +311,10 @@
                                 <div class="dropdown-divider"></div>
                                 <!-- text-->
                                 <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account
-                                    Setting</a>
+                                    Setting</a> --}}
                                 <!-- text-->
-                                <div class="dropdown-divider"></div>
+                                {{-- <div class="dropdown-divider"></div> --}}
                                 <!-- text-->
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                                document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-power-off"></i> Logout
-                                </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -319,8 +326,7 @@
                         <!-- ============================================================== -->
                         <!-- End User Profile -->
                         <!-- ============================================================== -->
-                        {{-- <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light"
-                                href="javascript:void(0)"><i class="ti-settings"></i></a></li> --}}
+                        <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li>
                     </ul>
                 </div>
             </nav>
@@ -338,9 +344,9 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
-                            <a href="{{ route('admin') }}"><i class="icon-speedometer"></i><span class="hide-menu">Dashboards</span></a>
-
+                            <a href="{{ route('dashboard') }}"><i class="icon-speedometer"></i><span class="hide-menu">Dashboards</span></a>
                         </li>
+                        <li class="nav-small-cap">--- ARTICLE</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-layout-grid2"></i><span class="hide-menu">Articles</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ url('admin/articles') }}">All Articles</a></li>
@@ -349,193 +355,29 @@
                                 <li><a href="#">Tag</a></li>
                             </ul>
                         </li>
+                        <li class="nav-small-cap">--- USER</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="ti-user"></span>
                                 <span class="hide-menu">User</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('admin.users') }}">All</a></li>
                                 <li><a href="{{ route('admin.create') }}">Create User</a></li>
-                                <li><a href="{{ url('admin/user/detail/'.Auth::id()) }}">Your Profile</a></li>
                             </ul>
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-palette"></i><span class="hide-menu">Ui Elements
-                                    <span class="badge badge-pill badge-primary text-white ml-auto">25</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="ui-cards.html">Cards</a></li>
-                                <li><a href="ui-user-card.html">User Cards</a></li>
-                                <li><a href="ui-buttons.html">Buttons</a></li>
-                                <li><a href="ui-modals.html">Modals</a></li>
-                                <li><a href="ui-tab.html">Tab</a></li>
-                                <li><a href="ui-tooltip-popover.html">Tooltip &amp; Popover</a></li>
-                                <li><a href="ui-tooltip-stylish.html">Tooltip stylish</a></li>
-                                <li><a href="ui-sweetalert.html">Sweet Alert</a></li>
-                                <li><a href="ui-notification.html">Notification</a></li>
-                                <li><a href="ui-progressbar.html">Progressbar</a></li>
-                                <li><a href="ui-nestable.html">Nestable</a></li>
-                                <li><a href="ui-range-slider.html">Range slider</a></li>
-                                <li><a href="ui-timeline.html">Timeline</a></li>
-                                <li><a href="ui-typography.html">Typography</a></li>
-                                <li><a href="ui-horizontal-timeline.html">Horizontal Timeline</a></li>
-                                <li><a href="ui-session-timeout.html">Session Timeout</a></li>
-                                <li><a href="ui-session-ideal-timeout.html">Session Ideal Timeout</a></li>
-                                <li><a href="ui-bootstrap.html">Bootstrap Ui</a></li>
-                                <li><a href="ui-breadcrumb.html">Breadcrumb</a></li>
-                                <li><a href="ui-bootstrap-switch.html">Bootstrap Switch</a></li>
-                                <li><a href="ui-list-media.html">List Media</a></li>
-                                <li><a href="ui-ribbons.html">Ribbons</a></li>
-                                <li><a href="ui-grid.html">Grid</a></li>
-                                <li><a href="ui-carousel.html">Carousel</a></li>
-                                <li><a href="ui-date-paginator.html">Date-paginator</a></li>
-                                <li><a href="ui-dragable-portlet.html">Dragable Portlet</a></li>
-                                <li><a href="ui-spinner.html">Spinner</a></li>
-                                <li><a href="ui-scrollspy.html">Scrollspy</a></li>
-                                <li><a href="ui-toasts.html">Toasts</a></li>
-                            </ul>
+                        <li><a href="{{ url('admin/user/detail/'.Auth::id()) }}"><span class=" icon-home"></span> <span class="hide-menu">Your Home</span></a></li>
+
+
+
+
+                        <li class="nav-small-cap">--- SETTING</li>
+                        <li> <a class="waves-effect waves-dark" href="{{ asset('dashboards') }}" aria-expanded="false"><i class="far fa-circle text-danger"></i><span class="hide-menu">Setting</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                <i class="far fa-circle text-success"></i>
+                                <span class="hide-menu">Log Out</span>
+                            </a>
+
                         </li>
-                        <li class="nav-small-cap">--- FORMS, TABLE &amp; WIDGETS</li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-layout-media-right-alt"></i><span class="hide-menu">Forms</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="form-basic.html">Basic Forms</a></li>
-                                <li><a href="form-layout.html">Form Layouts</a></li>
-                                <li><a href="form-addons.html">Form Addons</a></li>
-                                <li><a href="form-material.html">Form Material</a></li>
-                                <li><a href="form-float-input.html">Floating Lable</a></li>
-                                <li><a href="form-pickers.html">Form Pickers</a></li>
-                                <li><a href="form-upload.html">File Upload</a></li>
-                                <li><a href="form-mask.html">Form Mask</a></li>
-                                <li><a href="form-validation.html">Form Validation</a></li>
-                                <li><a href="form-bootstrap-validation.html">Form Bootstrap Validation</a></li>
-                                <li><a href="form-dropzone.html">File Dropzone</a></li>
-                                <li><a href="form-icheck.html">Icheck control</a></li>
-                                <li><a href="form-img-cropper.html">Image Cropper</a></li>
-                                <li><a href="form-bootstrapwysihtml5.html">HTML5 Editor</a></li>
-                                <li><a href="form-typehead.html">Form Typehead</a></li>
-                                <li><a href="form-wizard.html">Form Wizard</a></li>
-                                <li><a href="form-xeditable.html">Xeditable Editor</a></li>
-                                <li><a href="form-summernote.html">Summernote Editor</a></li>
-                                <li><a href="form-tinymce.html">Tinymce Editor</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-layout-accordion-merged"></i><span class="hide-menu">Tables</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="table-basic.html">Basic Tables</a></li>
-                                <li><a href="table-layout.html">Table Layouts</a></li>
-                                <li><a href="table-data-table.html">Data Tables</a></li>
-                                <li><a href="table-footable.html">Footable</a></li>
-                                <li><a href="table-jsgrid.html">Js Grid Table</a></li>
-                                <li><a href="table-responsive.html">Responsive Table</a></li>
-                                <li><a href="table-bootstrap.html">Bootstrap Tables</a></li>
-                                <li><a href="table-editable-table.html">Editable Table</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-settings"></i><span class="hide-menu">Widgets</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="widget-data.html">Data Widgets</a></li>
-                                <li><a href="widget-apps.html">Apps Widgets</a></li>
-                                <li><a href="widget-charts.html">Charts Widgets</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-small-cap">--- EXTRA COMPONENTS</li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-gallery"></i><span class="hide-menu">Page
-                                    Layout</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="layout-single-column.html">1 Column</a></li>
-                                <li><a href="layout-fix-header.html">Fix header</a></li>
-                                <li><a href="layout-fix-sidebar.html">Fix sidebar</a></li>
-                                <li><a href="layout-fix-header-sidebar.html">Fixe header &amp; Sidebar</a></li>
-                                <li><a href="layout-boxed.html">Boxed Layout</a></li>
-                                <li><a href="layout-logo-center.html">Logo in Center</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-files"></i><span class="hide-menu">Sample Pages <span class="badge badge-pill badge-info">25</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="starter-kit.html">Starter Kit</a></li>
-                                <li><a href="pages-blank.html">Blank page</a></li>
-                                <li><a href="javascript:void(0)" class="has-arrow">Authentication <span class="badge badge-pill badge-success pull-right">6</span></a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="pages-login.html">Login 1</a></li>
-                                        <li><a href="pages-login-2.html">Login 2</a></li>
-                                        <li><a href="pages-register.html">Register</a></li>
-                                        <li><a href="pages-register2.html">Register 2</a></li>
-                                        <li><a href="pages-register3.html">Register 3</a></li>
-                                        <li><a href="pages-lockscreen.html">Lockscreen</a></li>
-                                        <li><a href="pages-recover-password.html">Recover password</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="pages-profile.html">Profile page</a></li>
-                                <li><a href="pages-animation.html">Animation</a></li>
-                                <li><a href="pages-fix-innersidebar.html">Sticky Left sidebar</a></li>
-                                <li><a href="pages-fix-inner-right-sidebar.html">Sticky Right sidebar</a></li>
-                                <li><a href="pages-invoice.html">Invoice</a></li>
-                                <li><a href="pages-treeview.html">Treeview</a></li>
-                                <li><a href="pages-utility-classes.html">Helper Classes</a></li>
-                                <li><a href="pages-search-result.html">Search result</a></li>
-                                <li><a href="pages-scroll.html">Scrollbar</a></li>
-                                <li><a href="pages-pricing.html">Pricing</a></li>
-                                <li><a href="pages-lightbox-popup.html">Lighbox popup</a></li>
-                                <li><a href="pages-gallery.html">Gallery</a></li>
-                                <li><a href="pages-faq.html">Faqs</a></li>
-                                <li><a href="javascript:void(0)" class="has-arrow">Error Pages</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="pages-error-400.html">400</a></li>
-                                        <li><a href="pages-error-403.html">403</a></li>
-                                        <li><a href="pages-error-404.html">404</a></li>
-                                        <li><a href="pages-error-500.html">500</a></li>
-                                        <li><a href="pages-error-503.html">503</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-pie-chart"></i><span class="hide-menu">Charts</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="chart-morris.html">Morris Chart</a></li>
-                                <li><a href="chart-chartist.html">Chartis Chart</a></li>
-                                <li><a href="chart-echart.html">Echarts</a></li>
-                                <li><a href="chart-flot.html">Flot Chart</a></li>
-                                <li><a href="chart-knob.html">Knob Chart</a></li>
-                                <li><a href="chart-chart-js.html">Chartjs</a></li>
-                                <li><a href="chart-sparkline.html">Sparkline Chart</a></li>
-                                <li><a href="chart-extra-chart.html">Extra chart</a></li>
-                                <li><a href="chart-peity.html">Peity Charts</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-light-bulb"></i><span class="hide-menu">Icons</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="icon-material.html">Material Icons</a></li>
-                                <li><a href="icon-fontawesome.html">Fontawesome Icons</a></li>
-                                <li><a href="icon-themify.html">Themify Icons</a></li>
-                                <li><a href="icon-weather.html">Weather Icons</a></li>
-                                <li><a href="icon-simple-lineicon.html">Simple Line icons</a></li>
-                                <li><a href="icon-flag.html">Flag Icons</a></li>
-                                <li><a href="icon-iconmind.html">Mind Icons</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-location-pin"></i><span class="hide-menu">Maps</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="map-google.html">Google Maps</a></li>
-                                <li><a href="map-vector.html">Vector Maps</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-align-left"></i><span class="hide-menu">Multi level
-                                    dd</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="javascript:void(0)">item 1.1</a></li>
-                                <li><a href="javascript:void(0)">item 1.2</a></li>
-                                <li> <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">Menu 1.3</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="javascript:void(0)">item 1.3.1</a></li>
-                                        <li><a href="javascript:void(0)">item 1.3.2</a></li>
-                                        <li><a href="javascript:void(0)">item 1.3.3</a></li>
-                                        <li><a href="javascript:void(0)">item 1.3.4</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="javascript:void(0)">item 1.4</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-small-cap">--- SUPPORT</li>
-                        <li> <a class="waves-effect waves-dark" href="{{ asset('dashboards') }}/documentation/documentation.html" aria-expanded="false"><i class="far fa-circle text-danger"></i><span class="hide-menu">Documentation</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="pages-login.html" aria-expanded="false"><i class="far fa-circle text-success"></i><span class="hide-menu">Log Out</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="far fa-circle text-info"></i><span class="hide-menu">FAQs</span></a></li>
+                        {{-- <li> <a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="far fa-circle text-info"></i><span class="hide-menu">FAQs</span></a></li> --}}
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -549,7 +391,7 @@
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
-            
+
             @yield('dashboard')
 
         </div>
@@ -557,7 +399,39 @@
             © 2021 All Rights Reserved by The Calm Tech
         </footer>
 
+        <div class="right-sidebar">
+            <div class="slimscrollright">
+                <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span>
+                </div>
+                <div class="r-panel-body">
+                    <ul id="themecolors" class="m-t-20">
+                        <li><b>With Light sidebar</b></li>
+                        <li><a href="javascript:void(0)" data-skin="skin-default" class="default-theme">1</a>
+                        </li>
+                        <li><a href="javascript:void(0)" data-skin="skin-green" class="green-theme">2</a></li>
+                        <li><a href="javascript:void(0)" data-skin="skin-red" class="red-theme">3</a></li>
+                        <li><a href="javascript:void(0)" data-skin="skin-blue" class="blue-theme working">4</a>
+                        </li>
+                        <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
+                        <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
+                        <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                        <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme ">7</a>
+                        </li>
+                        <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
+                        <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a>
+                        </li>
+                        <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
+                        <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
+                        <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+
     </div>
+
 
     <script src="{{ asset('dashboards/assets/node_modules/jquery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('dashboards/dist/js/perfect-scrollbar.jquery.min.js') }}"></script>
@@ -569,7 +443,19 @@
     <script src="{{ asset('dashboards/dist/js/sidebarmenu.js') }}"></script>
     <script src="{{ asset('dashboards/dist/js/custom.min.js') }}"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('.logoimg').hide();
+        });
+
+        function logo() {
+            $('.logoimg').toggle();
+            $('.logotext').toggle();
+        }
+
+    </script>
     @yield('script')
+
 </body>
 
 </html>
