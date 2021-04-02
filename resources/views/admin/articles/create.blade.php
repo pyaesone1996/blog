@@ -99,8 +99,6 @@
                                             <textarea name="description" id="description" class="form-control" rows="5"></textarea>
                                             <small class="text-muted">The description is just optional ,sometime you may show it.</small>
                                         </div>
-
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

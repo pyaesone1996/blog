@@ -39,5 +39,24 @@
         </div>
     </div>
     @endforeach
+
+
+    <div class="row">
+        @foreach ($articles as $article)
+        <div class="col-lg-4 col-md-6 img-responsive">
+            <div class="card">
+                <img class="card-img-top img-responsive" src=" {{ asset('dashboards/assets/images/big/img4.jpg') }} " alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">{{ $article->title }}</h4>
+                    <p class="card-text">{{ $article->excerpt }}</p>
+                    <a href="" class="btn btn-primary"><i class="fa fa-street-view" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+
 </div>
+
 @endsection
