@@ -23,7 +23,7 @@ class AdminController extends Controller
         $roles = Role::all();
         $users = User::all();
         $articles = Article::all();
-
+        
         $admins = User::whereHas('roles', function ($admin) {
             $admin->where('role_id', 1);
         })->get();
@@ -35,7 +35,6 @@ class AdminController extends Controller
         $reg_users = User::whereHas('roles', function ($user) {
             $user->where('role_id', 3);
         })->get();
-
 
         return view('admin.dashboard', compact('users', 'reg_users', 'admins', 'authors', 'roles', 'articles'));
     }

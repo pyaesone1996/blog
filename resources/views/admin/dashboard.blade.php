@@ -43,7 +43,7 @@
                         </div>
                         <!-- Column -->
                         <div class="col text-right align-self-center">
-                            <div data-label="20%" class="css-bar m-b-0 css-bar-primary css-bar-20"><i class="mdi mdi-account-circle"></i></div>
+                            <div data-label="20%" class="css-bar m-b-0 css-bar-success css-bar-20"><i class="mdi mdi-account-circle"></i></div>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                         </div>
                         <!-- Column -->
                         <div class="col text-right align-self-center">
-                            <div data-label="30%" class="css-bar m-b-0 css-bar-danger css-bar-20"><i class="mdi mdi-briefcase-check"></i></div>
+                            <div data-label="30%" class="css-bar m-b-0 css-bar-warning css-bar-20"><i class="mdi mdi-briefcase-check"></i></div>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         </div>
                         <!-- Column -->
                         <div class="col text-right align-self-center">
-                            <div data-label="40%" class="css-bar m-b-0 css-bar-warning css-bar-40"><i class="mdi mdi-star-circle"></i></div>
+                            <div data-label="40%" class="css-bar m-b-0 css-bar-primary css-bar-40"><i class="mdi mdi-star-circle"></i></div>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                             <p class="m-b-10 text-muted">{{ $article->body }}</p>
                             <div class="comment-footer">
                                 <span class="text-muted pull-right">{{ $article->created_at->format('M d, Y') }}</span> <span class="action-icons">
-                                    <a href="{{ url('articles/detail/'.$article->id) }}"><span class="badge badge-pill badge-info">View</span> </a>
+                                    <a target="_blank" href="{{ url('articles/detail/'.$article->id) }}"><span class="badge badge-pill badge-info">View</span> </a>
 
 
                                 </span>
@@ -192,11 +192,12 @@
                                 <td><span class="badge  badge-pill 
 
                                     @foreach ($roles as $role) 
-                                    {{ $user->roles->pluck('name')->contains('Admin') ? 'badge-success' : 'badge-warning text-white' }} 
+                                    {{ $user->roles->pluck('name')->contains('Admin') ? 'badge-danger' : 
+                                    ($user->roles->pluck('name')->contains('Member') ? 'badge-warning text-white' : 'badge-success text-white' ) }}
                                     @endforeach ">
 
                                         @foreach ($roles as $role)
-                                        {{ $user->roles->pluck('name')->contains($role->name) == $role->name ? $role->name : ''  }}
+                                        {{ $user->roles->pluck('label')->contains($role->label) == $role->label ? $role->label : ''  }}
                                         @endforeach
 
                                     </span></td>
