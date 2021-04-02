@@ -1,5 +1,4 @@
 @extends('layouts.dashboard')
-
 @section('style')
 <link href="{{ asset('/dashboards/assets/node_modules/css-chart/css-chart.css') }}" rel="stylesheet">
 @endsection

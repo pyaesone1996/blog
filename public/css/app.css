@@ -1,11 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
-
-/*!
- * Bootstrap v4.6.0 (https://getbootstrap.com/)
- * Copyright 2011-2021 The Bootstrap Authors
- * Copyright 2011-2021 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+@import url(https://fonts.googleapis.com/css?family=Nunito);
 
 :root {
   --blue: #3490dc;
@@ -21,7 +14,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --dashboard/../../../: #3490dc;
+  --primary: #3490dc;
   --secondary: #6c757d;
   --success: #38c172;
   --info: #6cb2eb;
@@ -1825,7 +1818,7 @@ pre code {
 }
 
 .table-primary,
-.table-dashboard/../../../ > th,
+.table-primary > th,
 .table-primary > td {
   background-color: #c6e0f5;
 }
