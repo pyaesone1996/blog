@@ -78,18 +78,28 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="/category" method="POST">
+                                <form action="/admin/category" method="POST">
                                     <div class="modal-body">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="category_name">Category Name</label>
+                                            <label for="category_name">Name</label>
                                             <input type="text" class="form-control @error('category_name') border-danger @enderror" name="category_name" id="category_name">
+                                            <small class="text-muted">The name is how it appears on your site.</small>
                                             @error('category_name')
-                                            <small id="category_name" class="form-text text-muted">you neet to fill your
-                                                category
-                                                name</small>
+                                            <small id="category_name" class="form-text text-muted">Please Fill Unique Category Name.</small>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label for="slug">Slug</label>
+                                            <input type="text" class="form-control" name="slug" id="slug">
+                                            <small class="text-muted">The “slug” is the URL-friendly version of the name.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <textarea name="description" id="description" class="form-control" rows="5"></textarea>
+                                            <small class="text-muted">The description is just optional ,sometime you may show it.</small>
+                                        </div>
+
 
                                     </div>
                                     <div class="modal-footer">
