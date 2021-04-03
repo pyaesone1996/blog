@@ -18,12 +18,11 @@ class ArticleController extends Controller
     public function index()
     {
         if (request('category')) {
-            $articles = Category::where('category_name', request('category'))->firstOrFail()->articles()->paginate(5);
-        } elseif(request('author')) {
-            $articles = Article::where('author_id', request('author'))->paginate(5);
-        }else{
-            $articles = Article::latest()->paginate(5);
-
+            $articles = Category::where('category_name', request('category'))->firstOrFail()->articles()->withlikes()->paginate(5);
+        } elseif (request('author')) {
+            $articles = Article::where('author_id', request('author'))->withlikes()->paginate(5);
+        } else {
+            $articles = Article::latest()->withlikes()->paginate(5);
         }
 
         return view('articles.index', ['articles' => $articles]);
@@ -31,14 +30,8 @@ class ArticleController extends Controller
 
     public function detail($id)
     {
-
         $article = Article::find($id);
         return view('articles.detail', compact('article'));
-    }
-
-    public function show(Article $article)
-    {
-        //
     }
 
     public function create()
@@ -50,7 +43,6 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-
         $this->validateArticle();
         $articles = new Article(request(['title', 'excerpt', 'body']));
         $articles->author_id = Auth::user()->id;
@@ -73,7 +65,6 @@ class ArticleController extends Controller
 
     public function update($id)
     {
-
         $article = Article::find($id);
         $article->title = request()->title;
         $article->excerpt = request()->excerpt;
@@ -92,18 +83,15 @@ class ArticleController extends Controller
         $article = Article::find($id);
         $article->delete();
         return redirect('/articles')->with('info', 'Article Has Been Deleted');
-
     }
 
     public function validateArticle()
     {
         return request()->validate([
-
             'title' => 'required',
             'excerpt' => 'required',
             'body' => 'required',
             'categories' => 'exists:categories,id',
-
         ]);
     }
 }

@@ -23,7 +23,7 @@ class AdminController extends Controller
         $roles = Role::all();
         $users = User::all();
         $articles = Article::all();
-        
+
         $admins = User::whereHas('roles', function ($admin) {
             $admin->where('role_id', 1);
         })->get();

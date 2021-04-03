@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+    use Likeable;
+
     protected $guarded = [];
 
     public function categories()

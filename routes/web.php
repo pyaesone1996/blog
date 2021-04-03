@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Like;
 
 //Article Route
 Route::get('/', 'ArticleController@index')->name('articles.index');
@@ -49,6 +50,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/articles/edit/{id}', 'AdminController@editArticles');
     Route::put('/articles/edit/{id}', 'AdminController@updateArticles');
     Route::get('/articles/delete/{id}', 'AdminController@deleteArticles');
+
+    //Like - Disklie
+    Route::post('/articles/{article}/like', 'LikeController@store');
+    Route::delete('/articles/{article}/like', 'LikeController@destroy');
 
     //Category
     Route::get('/categories', 'AdminController@categories');
