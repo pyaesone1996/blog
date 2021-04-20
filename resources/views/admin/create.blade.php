@@ -2,8 +2,8 @@
 
 @section('style')
 
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous" />
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" integrity="sha256-jKV9n9bkk/CTP8zbtEtnKaKf+ehRovOYeKoyfthwbC8=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" integrity="sha256-jKV9n9bkk/CTP8zbtEtnKaKf+ehRovOYeKoyfthwbC8=" crossorigin="anonymous" />
 
 <link href="{{ asset('dashboards/dist/css/pages/file-upload.css') }}" rel="stylesheet">
 @endsection
@@ -68,7 +68,7 @@
                                 <span class="input-group-text" id="basic-addon1"><i class="far fa-eye" id="togglePassword"></i></span>
                             </div>
                             <div class="input-group-prepend">
-                                <a onclick="generate()" type="button" class="input-group-text" id="basic-addon2">Generate</a>
+                                <a onclick="generate()" type="button" class="input-group-text" id="generate-pwd">Generate</a>
                             </div>
 
                         </div>
@@ -132,7 +132,7 @@
     }
     // Click once generate
     $(function() {
-        $("#basic-addon2").click();
+        $("#generate-pwd").click();
     });
 
 </script>

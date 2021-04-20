@@ -5,7 +5,6 @@
 @endsection
 @section('content')
 <div class="container">
-
     <h1 class="mb-5">Author</h1>
     <ul class="list-unstyled">
         @foreach($authors as$key => $author)
@@ -15,7 +14,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
-                            <img src="{{ asset('/storage/'.$author->profile) }}" alt="user" class="img-fluid">
+                            <img src="{{ $author->profile() }}" alt="{{ $author->username . '-image'}}" class="img-fluid">
                         </div>
                         <div class="col-lg-9 col-md-6">
                             <div class="mt-2 text-left">
@@ -39,7 +38,7 @@
                                 <a href=""><i class="fab fa-youtube"></i></a>
 
                             </div>
-                            <a href="{{ url('authors/detail/'.$author->id) }}" class="btn btn-info float-right text-white">Detail </a>
+                            <a href="{{ url('@'.$author->username) }}" class="btn btn-info float-right text-white">Detail </a>
                         </div>
                     </div>
 
@@ -75,7 +74,7 @@
                         </div>
 
                         <div class="col-lg-3 col-md-6">
-                            <img src="{{ asset('/storage/'.$author->profile) }}" alt="user" class="img-fluid">
+                            <img src="{{ $author->profile() }}" alt="{{ $author->username.'-image' }}" class="img-fluid">
                         </div>
 
 

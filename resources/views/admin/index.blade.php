@@ -32,7 +32,8 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    <a href=""><img src="{{ asset('/storage/'.$user->profile) }}" alt="user" width="40" height="40" class="img-circle" /> {{ $user->name }}</a>
+                                    <a href=""><img src="{{ $user->profile() }}" alt="{{ $user->username .'-image' }}" width="40" class="img-circle" /> {{ $user->username }}</a>
+
                                 </td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>

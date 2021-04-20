@@ -10,6 +10,11 @@ class Article extends Model
 
     protected $guarded = [];
 
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('title', 'LIKE', "%$search%");
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class)->withTimestamps();
@@ -23,5 +28,10 @@ class Article extends Model
     public function author()
     {
         return $this->belongsto(User::class, 'author_id');
+    }
+
+    public function getFeaturedImage()
+    {
+        return asset('/storage/articles/' . $this->featured_image);
     }
 }

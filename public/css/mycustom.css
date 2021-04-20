@@ -22,3 +22,19 @@ span.event_number{
 card-body img{
     position: relative;
 }
+.profiletimeline .sl-left img, .steamline .sl-left img {
+    max-width: 80px!important;
+    transform: translate(-20px, 10px)!important;
+}
+
+ .nav-link {
+    display: block;
+    padding: 2px 1rem;
+}
+  header nav .active {
+    color: #6cb2eb !important;
+    border: 1px solid #6cb2eb;
+    border-radius: 5%;
+    padding: 2px 12px !important;
+    display: inline-block;
+}

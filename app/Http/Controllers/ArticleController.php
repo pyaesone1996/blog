@@ -18,11 +18,14 @@ class ArticleController extends Controller
     public function index()
     {
         if (request('category')) {
-            $articles = Category::where('category_name', request('category'))->firstOrFail()->articles()->withlikes()->paginate(5);
+            $categories = Category::where('category_name', request('category'))->firstOrFail()->articles()->get();
+            foreach ($categories as $category) : $article_id[] = $category->id;
+            endforeach;
+            $articles = Article::whereIn('id', $article_id)->withlikes()->paginate(15);
         } elseif (request('author')) {
-            $articles = Article::where('author_id', request('author'))->withlikes()->paginate(5);
+            $articles = Article::where('author_id', request('author'))->withlikes()->paginate(15);
         } else {
-            $articles = Article::latest()->withlikes()->paginate(5);
+            $articles = Article::latest()->withlikes()->paginate(15);
         }
 
         return view('articles.index', ['articles' => $articles]);
@@ -30,7 +33,7 @@ class ArticleController extends Controller
 
     public function detail($id)
     {
-        $article = Article::find($id);
+        $article = Article::where('id', $id)->withlikes()->first();
         return view('articles.detail', compact('article'));
     }
 
@@ -60,6 +63,9 @@ class ArticleController extends Controller
     {
         $categories = Category::all();
         $article = Article::find($id);
+
+        abort_if($article->author->isNot(current_user()), 404);
+
         return view('articles.edit', compact('article', 'categories'));
     }
 

@@ -24,11 +24,11 @@
         </div>
 
         <div class="row">
-            <!-- Column -->
+
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="card"> <img class="card-img" src="/dashboards/assets/images/background/socialbg.jpg" height="456" alt="Card image">
                     <div class="card-img-overlay card-inverse text-white social-profile d-flex justify-content-center">
-                        <div class="align-self-center"> <img src="{{ asset('/storage/'.$user->profile) }}" class="img-circle" width="80">
+                        <div class="align-self-center"> <img src="{{ $user->profile() }}" class="img-circle" width="80">
                             <h4 class="card-title">{{ $user->name }}</h4>
                             <h6 class="card-subtitle mt-1">@foreach ($roles as $role )@php $name = $role->label @endphp
                                 {{ $user->roles->pluck('label')->contains($name) ? $name : '' }}@endforeach</h6>
@@ -37,11 +37,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Column -->
-            <!-- Column -->
+
             <div class="col-lg-8 col-xlg-9 col-md-7">
                 <div class="card">
-                    <!-- Nav tabs -->
                     <ul class="nav nav-tabs profile-tab" role="tablist">
                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Profile</a>
                         </li>
@@ -51,7 +49,6 @@
                         @endif
                     </ul>
 
-                    <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="profile" role="tabpanel">
                             <div class="card-body">
@@ -82,6 +79,7 @@
 
                             </div>
                         </div>
+
                         <div class="tab-pane" id="settings" role="tabpanel">
                             <div class="card-body">
                                 <form class="form-horizontal form-material" method="POST" action="/admin/user/edit/{{ $user->id }}" enctype="multipart/form-data">
@@ -165,12 +163,9 @@
                                     </div>
 
                                     @if ($user->profile)
-                                    <div>
-
-                                    </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <img class="" src="{{ asset('/storage/'.$user->profile) }}" width="45" alt="{{config('app.name')}}-{{ $user->profile }}">
+                                            <img class="" src="{{ $user->profile() }}" width="35" alt="{{config('app.name')}}-{{ $user->profile }}">
                                         </div>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="profile" name="profile" aria-describedby="profile">
@@ -196,12 +191,12 @@
                             </div>
                         </div>
                     </div>
+
                     <div>
                         <a href="{{ url()->previous() }}" class="btn btn-secondary float-right mr-3 text-danger">Back</a>
                     </div>
                 </div>
             </div>
-            <!-- Column -->
         </div>
 
     </div>

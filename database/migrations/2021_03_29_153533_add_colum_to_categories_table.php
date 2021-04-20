@@ -6,33 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class AddColumToCategoriesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
             $table->string('slug')->nullable();
             $table->string('description')->nullable();
-
         });
-
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::table('categories', function (Blueprint $table) {
             $table->dropColumn('slug');
-            $table->string('description');
-
+            $table->dropColumn('description');
         });
-
     }
 }

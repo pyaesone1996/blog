@@ -15,7 +15,7 @@ class AuthorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
+    {
         $authors = User::whereHas('roles', function ($author) {
             $author->where('role_id', 1)->orwhere('role_id', 2);
         })->get();
@@ -36,14 +36,10 @@ class AuthorController extends Controller
         $profile = $request->file(['profile']);
 
         if (isset($profile)) {
-
             $profile_name = $profile->getClientOriginalName();
             $profile->storeAs('public/', $profile_name);
-
         } else {
-
-            $profile_name = "noimage.jpg";
-
+            $profile_name = 'noimage.jpg';
         }
 
         $author = new User();
@@ -69,10 +65,10 @@ class AuthorController extends Controller
         return redirect(url('authors'));
     }
 
-    public function show($id)
+    public function show($name)
     {
-        $author = User::findOrFail($id);
-        $articles = Article::where('author_id', $id)->get();
+        $author = User::where('username', $name)->first();
+        $articles = Article::where('author_id', $author->id)->get();
         return view('authors.detail', compact('author', 'articles'));
     }
 
@@ -84,7 +80,6 @@ class AuthorController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $author = User::findOrFail($id);
         $profile = $request->file(['profile']);
 
@@ -108,7 +103,6 @@ class AuthorController extends Controller
         $author->save();
 
         return redirect(url('authors/detail/' . $author->id));
-
     }
 
     public function delete($id)

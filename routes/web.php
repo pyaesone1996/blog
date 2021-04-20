@@ -1,8 +1,20 @@
 <?php
 
+use App\Like;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Like;
+
+// Search Route
+Route::get('/search', function () {
+    $query = request('q');
+    $repo = App::make('App\Repositories\ArticlesRepository');
+    $articles = $query
+                ? $repo->search($query)
+                : $repo::getAll();
+
+    return view('articles.index', compact('articles'));
+});
 
 //Article Route
 Route::get('/', 'ArticleController@index')->name('articles.index');
@@ -27,7 +39,7 @@ Route::get('/articles/comment/delete/{id}', 'CommentController@delete');
 Route::get('/authors', 'AuthorController@index')->name('authors');
 Route::post('/authors', 'AuthorController@store');
 Route::get('/authors/create', 'AuthorController@create');
-Route::get('/authors/detail/{author}', 'AuthorController@show')->name('author.detail');
+Route::get('/@{author}', 'AuthorController@show')->name('author.detail');
 Route::get('/authors/edit/{id}', 'AuthorController@edit');
 Route::put('/authors/edit/{id}', 'AuthorController@update');
 Route::get('/authors/delete/{id}', 'AuthorController@delete');
@@ -44,7 +56,7 @@ Route::prefix('admin')->group(function () {
 
     //Article
     Route::get('/articles', 'AdminController@articles');
-    Route::post('/articles/create', 'AdminController@storeArtiles');
+    Route::post('/articles/create', 'AdminController@storeArticles');
     Route::get('/articles/create', 'AdminController@createArticles');
     Route::get('/articles/detail/{id}', 'AdminController@detailArticles');
     Route::get('/articles/edit/{id}', 'AdminController@editArticles');
@@ -64,13 +76,8 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/member', function () {
-        return view('dashboards.member');
-    });
-
-    Route::get('/user', function () {
-        return view('dashboards.user');
-    });
+    Route::get('/settings', 'SettingsController@index');
+    Route::patch('/settings/{settings}', 'SettingsController@update');
 });
 
 Auth::routes();

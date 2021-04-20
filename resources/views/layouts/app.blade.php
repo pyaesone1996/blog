@@ -3,21 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="description" content="{{ $setting->site_description }}">
+    <title>{{ $setting->site_title }} | {{$setting->site_tagline }}</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/storage').'/'.$setting->site_icon }}">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    @yield('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mycustom.css') }}" rel="stylesheet">
-    @yield('style')
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+
+    <header id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar sticky-top">
+
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ $setting->site_title }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -27,16 +31,24 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="{{url('/')}}" class="nav-link text-sucess">Articles</a>
+                            <a href="{{url('/')}}" class="nav-link text-sucess {{ active('/') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{url('/authors')}}" class="nav-link text-sucess">Authors</a>
-
+                            <a href="{{url('/articles')}}" class="nav-link text-sucess {{ active('articles') }}">Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('/authors')}}" class="nav-link text-sucess {{ active('authors') }}">Authors</a>
                         </li>
                     </ul>
 
+                    <div class="navbar-nav mr-3">
+                        <form class="form-inline my-2 my-lg-0" method="GET" action="search">
+                            <input class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search & Enter" name="q">
+                        </form>
+                    </div>
+
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav">
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
@@ -48,11 +60,11 @@
                         </li>
                         @endif
                         @else
+                        <img src="{{ Auth::user()->profile() }}" alt="{{ auth()->user()->username }}" width="30" height="30" class="rounded-circle align-self-center">
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -70,11 +82,16 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-5">
             @yield('content')
         </main>
-    </div>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    </header>
+
+    <footer class="bg-white py-4 shadow-sm">
+        <p class="text-center mb-0">{{ $setting->footer_information }}</p>
+    </footer>
+    <script src="{{ asset('js/app.js') }}"></script>
     @yield('script')
 </body>
+
 </html>

@@ -1,43 +1,74 @@
 @extends('layouts.app')
-
+@section('style')
+<link rel="stylesheet" href="{{ asset('/../../../dashboards/assets/icons/font-awesome/css/all.css') }}">
+@endsection
 @section('content')
 <div class="container">
     <div class="card mb-2">
         <div class="card-body">
+            @if($article->featured_image)
+            <div class="d-block mb-4">
+                <img src="{{ $article->getFeaturedImage() }}" alt="">
+            </div>
+            @endif
 
-            <h5 class="card-title">{{ $article->title }}</h5>
-            <div class="card-subtitle mb-2 text-muted small">
-                {{ $article->created_at->diffForHumans() }}
+            <div class="card-subtitle mb-2 small">
+                <div class="d-flex justify-content-start align-middle">
+                    <a href="{{ url('@'.$article->author->username) }}" class="text-decoration-none text-dark">
+                        <img src="{{ $article->author->profile() }}" width="30" height="30" class="rounded-circle mr-2 align-self-center" alt="">
+                        <span class="align-self-center">{{ $article->author->name}}</span>
+                    </a>
+                    <p class="align-self-center mb-0 ml-3 text-muted">
+                        <span class="text-info">Posted On</span> {{ $article->created_at->diffForHumans() }}
+                    </p>
+                </div>
             </div>
 
+            <div class="my-3">
+                @foreach($article->categories as $key => $category)
+                <a href="{{ url('/?category='.$category->category_name) }}" class="badge badge-secondary px-3 py-2">{{ $category->category_name }} </a>
+                @endforeach
+            </div>
+            <h4 class="card-title">{{ $article->title }}</h4>
             <p class="cart-text text-justify">
                 {{ $article->body }}
             </p>
-            @if ($article->author->name)
-            <p class="cart-text">
-                Author By :
-                <span>{{ $article->author->name}}</span>
-            </p>
-            @endif
+            <div class="d-flex justify-content-start">
+                <form action="/admin/articles/{{ $article->id }}/like" method="POST">
+                    @csrf
+                    @if(Auth::check())
+                    <button type="submit" class="p-0 btn text-decoration-none {{ $article->isLikeBy(Auth::user()) ? 'text-info' : 'text-dark'  }}">
+                        @endif
+                        <div class="d-flex align-items-center justify-content-start">
+                            <i class=" far fa-thumbs-up align-self-center mr-2"> </i>
+                            <span class="align-self-center">{{ $article->liked  ?: 0}}</span>
+                        </div>
+                    </button>
 
-            @if (count($article->categories) > 0)
-            Category :
-            @endif
+                </form>
+                <form action="/admin/articles/{{ $article->id }}/like" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    @if(Auth::check())
+                    <button type="submit" class="p-0 btn text-decoration-none {{ $article->isDislikeBy(Auth::user()) ? 'text-info' : 'text-dark'  }}">
+                        @endif
+                        <div class="d-flex align-items-center justify-content-start ml-3">
+                            <i class=" far fa-thumbs-down align-self-center mr-2"> </i>
+                            <span class="align-self-center"> {{ $article->disliked  ?: 0}}</span>
+                        </div>
+                    </button>
 
-            @foreach($article->categories as $key => $category)
-            <a href="{{ url('/?category='.$category->category_name) }}">{{ $category->category_name }} , </a>
-            @endforeach
-            <div class="mt-2">
-
-                <a href='{{ route("articles.index") }}' class="btn btn-warning">Back</a>
-                @if ( Auth::id() == $article->author_id )
-
-                <a href='{{ url("/articles/edit/$article->id")}}' class="btn btn-success">Edit</a>
-                <a href='{{ url("/articles/delete/$article->id") }}' class="btn btn-danger">Delete</a>
-
-                @endif
+                </form>
+                <div class="mt-2 ml-auto justify-content-end">
+                    @if(current_user()->is($article->author))
+                    <a href='{{ url("admin/articles/edit/".$article->id) }}' class="btn btn-outline-info px-4 btn-sm ">Edit</a>
+                    @endif
+                    <a href='{{ route("articles.index") }}' class="btn btn-outline-secondary px-4 btn-sm  ml-2">Back</a>
+                </div>
 
             </div>
+
+
         </div>
     </div>
 
@@ -61,7 +92,6 @@
         </div>
     </div>
     @endif
-
 
     @foreach ($article->comments as $comment)
     <div class="modal fade" id="comment{{$comment->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

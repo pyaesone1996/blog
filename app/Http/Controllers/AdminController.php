@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
-use App\Category;
 use App\Role;
 use App\User;
+use App\Article;
+use App\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -60,6 +62,7 @@ class AdminController extends Controller
     {
         request()->validate([
             'name' => 'required',
+            'username' => ['required', 'unique:users', 'alpha_dash'],
             'email' => 'required',
             'password' => 'required',
             'role_id' => 'required',
@@ -101,20 +104,33 @@ class AdminController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        request()->validate([
+            'username' => 'alpha_dash'
+        ]);
         $user = User::findOrFail($id);
-        abort_if($user->isNot(auth()->user()), 404) ;
-        $profile = $request->file(['profile']);
+        abort_if($user->isNot(current_user()), 404) ;
+        //Get Image File And Create Location Where To Save
+        $profile = $request->file('profile');
+
+        $path = public_path() . '/storage/profile/';
 
         if (!isset($profile)) {
             $profile_name = $user->profile;
         } else {
+            //Create Directory to save image there
+            File::exists($path) or File::makeDirectory($path);
+
+            //Crop the image and Save existing directory
+            Image::make($profile)->crop(400, 400)->save($path . $profile->getClientOriginalName());
+
+            //Get original name and save original file
             $profile_name = $profile->getClientOriginalName();
             $profile->storeAs('public/', $profile_name);
             $profile_name = $profile_name;
         }
 
         $user->name = $request->name;
+        $user->username = $request->username;
         $user->email = $request->email;
         $user->date_of_birth = $request->date_of_birth;
         $user->phone = $request->phone;
@@ -154,14 +170,27 @@ class AdminController extends Controller
         return view('admin/articles/create', compact('categories', 'authors'));
     }
 
-    public function storeArtiles(Request $request)
+    public function storeArticles(Request $request)
     {
         $this->validateArticle();
+
+        if ($request->file('featured_image')) {
+            $featured_image = $request->file('featured_image');
+            $featured_image_name = time() . str_replace(' ', '_', $featured_image->getClientOriginalName());
+
+            $crop_path = public_path() . '/storage/articles/';
+            File::exists($crop_path) or File::makeDirectory($crop_path);
+
+            Image::make($featured_image)->crop(700, 900)->save($crop_path . $featured_image_name);
+            $featured_image->storeAs('public/', $featured_image_name);
+        }
+
         $articles = new Article(request(['title', 'excerpt', 'body']));
         $articles->author_id = Auth::user()->id;
-        $articles->title = request()->title;
-        $articles->excerpt = request()->excerpt;
-        $articles->body = request()->body;
+        $articles->title = $request->title;
+        $articles->excerpt = $request->excerpt;
+        $articles->body = $request->body;
+        $articles->featured_image = $featured_image_name;
         $articles->save();
 
         $articles->categories()->attach(request('categories'));
@@ -176,19 +205,34 @@ class AdminController extends Controller
         return view('admin.articles.edit', compact('article', 'categories'));
     }
 
-    public function updateArticles($id)
+    public function updateArticles(Request $request, $id)
     {
         $article = Article::find($id);
-        $article->title = request()->title;
-        $article->excerpt = request()->excerpt;
-        $article->body = request()->body;
+
+        if ($request->file('featured_image')) {
+            $featured_image = $request->file('featured_image');
+            $featured_image_name = time() . str_replace(' ', '_', $featured_image->getClientOriginalName());
+
+            $crop_path = public_path() . '/storage/articles/';
+            File::exists($crop_path) or File::makeDirectory($crop_path);
+
+            Image::make($featured_image)->crop(900, 700)->save($crop_path . $featured_image_name);
+            $featured_image->storeAs('public/', $featured_image_name);
+        } else {
+            $featured_image_name = $article->featured_image ;
+        }
+
+        $article->title = $request->title;
+        $article->excerpt = $request->excerpt;
+        $article->body = $request->body;
+        $article->featured_image = $featured_image_name;
         $article->save();
 
-        if (request()->categories) {
+        if ($request->categories) {
             $article->categories()->sync(request('categories'));
         }
 
-        return redirect('admin/articles/');
+        return redirect('articles/detail/' . $id);
     }
 
     public function deleteArticles($id)

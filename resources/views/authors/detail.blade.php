@@ -3,16 +3,14 @@
 @section('style')
 <link href="{{ asset('/dashboards/dist/css/style.min.css') }}" rel="stylesheet">
 @endsection
-
 @section('content')
 <div class="container">
-
     <div class="row">
 
         <div class="col-lg-4 col-xlg-3 col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <center class="m-t-30"> <img src="{{ asset('/storage/'.$author->profile) }}" class="img-circle" width="150" height="150" />
+                    <center class="m-t-30"> <img src="{{ $author->profile() }}" class="img-circle" width="150" />
                         <h4 class="card-title m-t-10">{{ $author->name }}</h4>
                         <h6 class="card-subtitle">{{ $author->username }}</h6>
                         <div class="row text-center justify-content-md-center">
@@ -51,9 +49,8 @@
         </div>
 
         <div class="col-lg-8 col-xlg-9 col-md-7">
-            <div class="card">
-
-                <ul class="nav nav-tabs profile-tab" role="tablist">
+            <div class="card overflow-auto" style="min-height: 605px; max-height:605px;">
+                <ul class="nav nav-tabs profile-tab sticky-top bg-white" role="tablist">
                     <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Profile</a> </li>
 
                     <li class="nav-item"> <a class="nav-link " data-toggle="tab" href="#home" role="tab">Timeline</a> </li>
@@ -87,9 +84,6 @@
                             <hr>
                             <h4 class="font-medium m-t-30">Biography</h4>
                             <p class="m-t-30">{{ $author->biography }}</p>
-
-                            <hr>
-
                         </div>
                     </div>
 
@@ -98,7 +92,11 @@
                             <div class="profiletimeline">
                                 @foreach ($articles as $article )
                                 <div class="sl-item">
-                                    <div class="sl-left"> <img src="/dashboards/assets/images/users/1.jpg" alt="user" class="img-circle" /> </div>
+                                    @if($article->featured_image)
+                                    <div class="sl-left"> <img src="{{ $article->getFeaturedImage() }}" alt="user" class="img-thumbnail" /> </div>
+                                    @else
+                                    <div class="sl-left"> <img src="/dashboards/assets/images/users/1.jpg" alt="user" class="img-thumbnail" /> </div>
+                                    @endif
                                     <div class="sl-right">
                                         <div><a href="{{ url('/articles/detail/'.$article->id) }}" class="link">{{ $article->title }}</a>
                                             <p><small>
