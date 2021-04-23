@@ -8,8 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Likeable;
-    use Notifiable;
+    use Notifiable,Likeable,Followable;
+
     protected $guarded = [];
 
     protected $hidden = [
@@ -48,7 +48,7 @@ class User extends Authenticatable
         return Carbon::parse($date)->diff(Carbon::now())->format('%y');
     }
 
-    public function profile()
+    public function getAvatarAttribute()
     {
         return asset('storage/profile/' . $this->profile);
     }
@@ -66,5 +66,15 @@ class User extends Authenticatable
     public function getRole()
     {
         return $this->first()->roles->first()->name;
+    }
+
+    public function timeline()
+    {
+        if (auth()->user() == $this) {
+            $ids = $this->follows()->pluck('id');
+            return Article::whereIn('author_id', $ids)->orWhere('author_id', $this->id)->latest()->withlikes()->get();
+        } else {
+            return  Article::where('author_id', $this->id)->latest()->withlikes()->get();
+        }
     }
 }

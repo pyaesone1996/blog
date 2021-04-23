@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
-                            <img src="{{ $author->profile() }}" alt="{{ $author->username . '-image'}}" class="img-fluid">
+                            <img src="{{ $author->avatar }}" alt="{{ $author->username . '-image'}}" class="img-fluid">
                         </div>
                         <div class="col-lg-9 col-md-6">
                             <div class="mt-2 text-left">
@@ -70,11 +70,12 @@
                                 <a href=""><i class="fab fa-youtube"></i></a>
 
                             </div>
-                            <a href="{{ url('authors/detail/'.$author->id) }}" class="mt-3 btn btn-info float-left text-white">Detail </a>
+                            <a href="{{ url('@'.$author->username) }}" class="mt-3 btn btn-info float-left text-white">Detail </a>
+
                         </div>
 
                         <div class="col-lg-3 col-md-6">
-                            <img src="{{ $author->profile() }}" alt="{{ $author->username.'-image' }}" class="img-fluid">
+                            <img src="{{ $author->avatar }}" alt="{{ $author->username.'-image' }}" class="img-fluid">
                         </div>
 
 

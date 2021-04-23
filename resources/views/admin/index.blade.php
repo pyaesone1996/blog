@@ -32,7 +32,7 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    <a href=""><img src="{{ $user->profile() }}" alt="{{ $user->username .'-image' }}" width="40" class="img-circle" /> {{ $user->username }}</a>
+                                    <a href=""><img src="{{ $user->avatar }}" alt="{{ $user->username .'-image' }}" width="40" class="img-circle" /> {{ $user->username }}</a>
 
                                 </td>
                                 <td>{{ $user->email }}</td>

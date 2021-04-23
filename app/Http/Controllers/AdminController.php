@@ -156,9 +156,9 @@ class AdminController extends Controller
     public function articles()
     {
         if (request('category')) {
-            $articles = Category::where('category_name', request('category'))->firstOrFail()->articles()->paginate(5);
+            $articles = Category::where('category_name', request('category'))->firstOrFail()->articles()->paginate(10);
         } else {
-            $articles = Article::latest()->paginate(5);
+            $articles = Article::latest()->paginate(10);
         }
         return view('admin.articles.index', compact('articles'));
     }

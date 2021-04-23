@@ -4,7 +4,7 @@ namespace App\Composers;
 
 use App\Repositories\SettingsRepository;
 
-class SidebarComposer
+class SettingComposer
 {
     protected $settings;
 

@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $authors = User::whereHas('roles', function ($author) {
@@ -68,8 +63,14 @@ class AuthorController extends Controller
     public function show($name)
     {
         $author = User::where('username', $name)->first();
-        $articles = Article::where('author_id', $author->id)->get();
-        return view('authors.detail', compact('author', 'articles'));
+
+        if (auth()->check()) {
+            $articles = $author->timeline();
+            return view('authors.detail', compact('author', 'articles'));
+        } else {
+            $articles = Article::where('author_id', $author->id)->withLikes()->get();
+            return view('authors.detail', compact('author', 'articles'));
+        }
     }
 
     public function edit($id)

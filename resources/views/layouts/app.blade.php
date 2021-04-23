@@ -16,10 +16,10 @@
 
 <body>
 
-    <header id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar sticky-top">
+    <header id="app" class="sticky-top">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar">
 
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ $setting->site_title }}
                 </a>
@@ -42,7 +42,7 @@
                     </ul>
 
                     <div class="navbar-nav mr-3">
-                        <form class="form-inline my-2 my-lg-0" method="GET" action="search">
+                        <form class="form-inline my-2 my-lg-0 app-search" method="GET" action="search">
                             <input class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search & Enter" name="q">
                         </form>
                     </div>
@@ -60,12 +60,15 @@
                         </li>
                         @endif
                         @else
-                        <img src="{{ Auth::user()->profile() }}" alt="{{ auth()->user()->username }}" width="30" height="30" class="rounded-circle align-self-center">
+                        <img src="{{ Auth::user()->avatar }}" alt="{{ auth()->user()->username }}" width="30" height="30" class="rounded-circle align-self-center">
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right mt-3" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('admin') }}">Dashboard</a>
+                                <a class="dropdown-item" href="{{ url('/@'.Auth::user()->username) }}">Profile</a>
+                                <a class="dropdown-item" href="{{ url('/admin/articles/create') }}">Create Article</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -81,15 +84,19 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-5">
-            @yield('content')
-        </main>
     </header>
+
+
+    <main class="my-5">
+        @yield('content')
+    </main>
+
+
 
     <footer class="bg-white py-4 shadow-sm">
         <p class="text-center mb-0">{{ $setting->footer_information }}</p>
     </footer>
+    <script src="http://unpkg.com/turbolinks"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('script')
 </body>

@@ -12,7 +12,7 @@
 @endsection
 @section('content')
 
-<div class="container">
+<div class="container mt-4">
     @if(session('info'))
     <div class="alert alert-info">
         {{ session('info') }}
@@ -37,7 +37,7 @@
         <hr>
         <div class="d-flex justify-content-between align-items-center">
             <a href="{{ url('@'.$article->author->username) }}" class="align-self-center text-decoration-none">
-                <img src="{{ $article->author->profile() }}" alt="" width="35" class="rounded-circle">
+                <img src="{{ $article->author->avatar }}" alt="" width="35" class="rounded-circle">
                 <p class="text-dark d-inline-block ml-2">{{ $article->author->name }}</p>
             </a>
             <a href='{{ url("articles/detail/$article->id") }}' class="btn btn-primary align-self-center">view<i class="fas fa-angle-double-right ml-2" aria-hidden="true"></i></a>
@@ -107,7 +107,7 @@
                 <hr>
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ url('@'.$article->author->username) }}" class="align-self-center text-decoration-none">
-                        <img src="{{ $article->author->profile() }}" alt="" width="35" class="rounded-circle">
+                        <img src="{{ $article->author->avatar }}" alt="" width="35" class="rounded-circle">
                         <p class="text-dark d-inline-block ml-2">{{ $article->author->name }}</p>
                     </a>
                     <a href=' {{ url("articles/detail/$article->id") }}' class="btn btn-primary align-self-center">view<i class="fas fa-angle-double-right ml-2" aria-hidden="true"></i></a>
@@ -156,7 +156,4 @@
 
 
 </div>
-@section('script')
-<script src="http://unpkg.com/turbolinks"></script>
-@endsection
 @endsection

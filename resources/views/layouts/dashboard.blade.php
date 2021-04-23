@@ -9,7 +9,6 @@
     <meta name="PowerBy" content="https://www.thecalmtech.com">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/storage').'/'.$setting->site_icon }}">
     <title>{{ $setting->site_title }} | {{$setting->site_tagline }}</title>
-
     @yield('style')
     <link href="{{ asset('dashboards/dist/css/style.min.css') }}" rel="stylesheet">
 </head>
@@ -63,7 +62,7 @@
                     <ul class="navbar-nav my-lg-0">
 
                         <li class="nav-item dropdown u-pro">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->profile() }}" alt="{{ Auth::user()->username.'-image' }}" class="img-circle" height="30"> <span class="hidden-md-down">{{ Auth::user()->username }}&nbsp;<i class="fa fa-angle-down"></i></span> </a>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->username.'-image' }}" class="img-circle" height="30"> <span class="hidden-md-down">{{ Auth::user()->username }}&nbsp;<i class="fa fa-angle-down"></i></span> </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <!-- text-->
                                 <a href="{{ route('admin.users.detail',['id' => Auth::id()] ) }}" class="dropdown-item"><i class="ti-user"></i> My

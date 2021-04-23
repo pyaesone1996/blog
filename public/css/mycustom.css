@@ -38,3 +38,27 @@ card-body img{
     padding: 2px 12px !important;
     display: inline-block;
 }
+header nav.navbar.navbar-expand-md.navbar-light.bg-white.shadow-sm.navbar.sticky-top {
+    z-index: 1500;
+}
+.aboutauthor-profile{
+    position: absolute;
+    top: -70px;
+    right: 70px;
+    z-index: 1;
+    width: 120px;
+}
+.author-content {
+    position: relative;
+    margin-top: 100px;
+}
+.app-search {
+  line-height: 60px; }
+.app-search .form-control {
+    border-radius: 60px;
+    transition: 0.2s ease-out;
+    width: 160px; 
+    border:1px solid #ddd}
+
+.app-search .form-control:focus {
+      width: 250px; }

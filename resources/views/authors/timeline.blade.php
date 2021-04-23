@@ -3,6 +3,7 @@
 @section('style')
 <link href="{{ asset('/dashboards/dist/css/style.min.css') }}" rel="stylesheet">
 @endsection
+
 @section('content')
 
 <div class="author_banner" style="background-image:url({{$author->avatar}});">
@@ -26,15 +27,13 @@
                     @endif
 
                     <div class="card-subtitle mb-2 small">
-                        <a href="{{ url('@'.$article->author->username) }}" class="text-decoration-none text-dark">
-                            <div class="d-flex justify-content-start align-items-center">
-                                <img src="{{ $article->author->avatar }}" width="30" alt="" class="rounded-circle">
-                                <p class="mx-2 mb-0 text-dark font-14 text-capitalize">{{ $article->author->username }}</p>
+                        <div class="d-flex justify-content-start align-items-center">
+                            <a href="{{ url('@'.$article->author->username) }}" class="text-decoration-none text-dark">
                                 <p class="align-self-center mb-0  text-muted">
                                     <span class="text-info">Posted On</span> {{ $article->created_at->diffForHumans() }}
                                 </p>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="my-3">
@@ -97,6 +96,4 @@
     </div>
 
 </div>
-
-
 @endsection

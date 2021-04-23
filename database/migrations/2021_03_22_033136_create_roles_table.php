@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateRolesTable extends Migration
 {
-
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
@@ -24,9 +23,7 @@ class CreateRolesTable extends Migration
         });
 
         Schema::create('ability_role', function (Blueprint $table) {
-
             $table->unique(['role_id', 'ability_id']);
-
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('ability_id');
             $table->timestamps();
@@ -43,7 +40,6 @@ class CreateRolesTable extends Migration
         });
 
         Schema::create('role_user', function (Blueprint $table) {
-
             $table->primary(['user_id', 'role_id']);
 
             $table->unsignedBigInteger('user_id');
@@ -59,7 +55,6 @@ class CreateRolesTable extends Migration
                 ->references('id')
                 ->on('roles')
                 ->onDelete('cascade');
-
         });
     }
 

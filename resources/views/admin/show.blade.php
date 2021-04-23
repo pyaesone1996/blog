@@ -28,7 +28,7 @@
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="card"> <img class="card-img" src="/dashboards/assets/images/background/socialbg.jpg" height="456" alt="Card image">
                     <div class="card-img-overlay card-inverse text-white social-profile d-flex justify-content-center">
-                        <div class="align-self-center"> <img src="{{ $user->profile() }}" class="img-circle" width="80">
+                        <div class="align-self-center"> <img src="{{ $user->avatar }}" class="img-circle" width="80">
                             <h4 class="card-title">{{ $user->name }}</h4>
                             <h6 class="card-subtitle mt-1">@foreach ($roles as $role )@php $name = $role->label @endphp
                                 {{ $user->roles->pluck('label')->contains($name) ? $name : '' }}@endforeach</h6>
@@ -165,7 +165,7 @@
                                     @if ($user->profile)
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <img class="" src="{{ $user->profile() }}" width="35" alt="{{config('app.name')}}-{{ $user->profile }}">
+                                            <img class="" src="{{ $user->avatar }}" width="35" alt="{{config('app.name')}}-{{ $user->profile }}">
                                         </div>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="profile" name="profile" aria-describedby="profile">

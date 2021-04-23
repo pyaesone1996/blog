@@ -92,7 +92,6 @@
                         <!-- Column -->
                         <div class="col text-right align-self-center">
                             <div data-label="60%" class="css-bar m-b-0 css-bar-info css-bar-{{ (124/4)-1  }}"><i class="mdi mdi-receipt"></i></div>
-
                         </div>
                     </div>
                 </div>
@@ -118,7 +117,7 @@
 
                     @foreach ($articles as $article)
                     <div class="d-flex no-block comment-row">
-                        <div class="p-2"><span class="round"><img src="{{ $article->author->profile() }}" alt="{{ $article->author->username .'-image' }}" width="50"></span></div>
+                        <div class="p-2"><span class="round"><img src="{{ $article->author->avatar }}" alt="{{ $article->author->username .'-image' }}" width="50"></span></div>
                         <div class="comment-text w-100">
                             <h5 class="font-medium">{{ $article->author->name }}</h5>
                             <p class="m-b-10 text-muted">{{ $article->body }}</p>
@@ -138,7 +137,7 @@
                     @foreach ($articles as $article)
                     @if(Auth::id() == $article->author->id)
                     <div class="d-flex no-block comment-row">
-                        <div class="p-2"><span class="round"><img src="{{ $article->author->profile() }}" alt="{{ $article->author->name .'-image' }}" width="50"></span></div>
+                        <div class="p-2"><span class="round"><img src="{{ $article->author->avatar }}" alt="{{ $article->author->name .'-image' }}" width="50"></span></div>
                         <div class="comment-text w-100">
                             <h5 class="font-medium">{{ $article->title }}</h5>
                             <p class="m-b-10 text-muted">{{ $article->body }}</p>

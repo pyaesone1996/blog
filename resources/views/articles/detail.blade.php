@@ -15,7 +15,7 @@
             <div class="card-subtitle mb-2 small">
                 <div class="d-flex justify-content-start align-middle">
                     <a href="{{ url('@'.$article->author->username) }}" class="text-decoration-none text-dark">
-                        <img src="{{ $article->author->profile() }}" width="30" height="30" class="rounded-circle mr-2 align-self-center" alt="">
+                        <img src="{{ $article->author->avatar }}" width="30" height="30" class="rounded-circle mr-2 align-self-center" alt="">
                         <span class="align-self-center">{{ $article->author->name}}</span>
                     </a>
                     <p class="align-self-center mb-0 ml-3 text-muted">
@@ -60,8 +60,10 @@
 
                 </form>
                 <div class="mt-2 ml-auto justify-content-end">
+                    @if(current_user())
                     @if(current_user()->is($article->author))
                     <a href='{{ url("admin/articles/edit/".$article->id) }}' class="btn btn-outline-info px-4 btn-sm ">Edit</a>
+                    @endif
                     @endif
                     <a href='{{ route("articles.index") }}' class="btn btn-outline-secondary px-4 btn-sm  ml-2">Back</a>
                 </div>
@@ -73,20 +75,23 @@
     </div>
 
     @if(count($article->comments)>0)
-    <div class="card">
-        <div class="card-body">
+    <div class="row">
+        <div class="col-12">
             @foreach ($article->comments as $comment)
-            <div class="border border-secondary p-3  {{ $loop->last ? '' : 'mb-4' }}  rounded-lg card-text">
-
+            <div class="border border-info p-3  {{ $loop->last ? '' : 'mb-4' }}  rounded-lg ">
                 <p class="">{{ $comment->content }}</p>
                 <div class="small">
                     By <b>{{ $comment->user->name }}</b>,
                     {{ $comment->created_at->diffForHumans() }}
                 </div>
+                @if(current_user()->hasRole('Admin') || current_user()->is($article->author) )
                 <div class="mt-3">
+                    @if(current_user()->is($article->author))
                     <a href="{{ url('comment/edit/'.$comment->id) }}" data-toggle="modal" data-target="#comment{{$comment->id}}" class="text-primary">Edit &plus; </a>
+                    @endif
                     <a href="{{ url('articles/comment/delete/'.$comment->id) }}" class="text-danger">Delete &cross;</a>
                 </div>
+                @endif
             </div>
             @endforeach
         </div>

@@ -43,7 +43,6 @@
                         </thead>
 
                         <tbody>
-
                             @if(Auth::user()->hasRole('Admin'))
                             @foreach($articles as $key => $article)
                             <tr>

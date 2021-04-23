@@ -1,6 +1,7 @@
 <?php
 
 use App\Like;
+use App\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +18,8 @@ Route::get('/search', function () {
 });
 
 //Article Route
-Route::get('/', 'ArticleController@index')->name('articles.index');
-Route::get('/articles', 'ArticleController@index');
+Route::get('/', 'ArticleController@index');
+Route::get('/articles', 'ArticleController@index')->name('articles.index');
 Route::post('/articles', 'ArticleController@store');
 Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
 Route::get('/articles/detail/{id}', 'ArticleController@detail');
@@ -40,6 +41,12 @@ Route::get('/authors', 'AuthorController@index')->name('authors');
 Route::post('/authors', 'AuthorController@store');
 Route::get('/authors/create', 'AuthorController@create');
 Route::get('/@{author}', 'AuthorController@show')->name('author.detail');
+Route::get('/@{name}/about', function ($name) {
+    $repo = App::make('App\Repositories\AuthorsRepository');
+    $author = $repo->aboutAuthor($name);
+    return view('authors.about', compact('author'));
+});
+
 Route::get('/authors/edit/{id}', 'AuthorController@edit');
 Route::put('/authors/edit/{id}', 'AuthorController@update');
 Route::get('/authors/delete/{id}', 'AuthorController@delete');
@@ -76,6 +83,9 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::post('/@{user:username}/follow', 'FollowsController@store');
+    Route::get('/@{user:username}/following', 'FollowsController@following');
+
     Route::get('/settings', 'SettingsController@index');
     Route::patch('/settings/{settings}', 'SettingsController@update');
 });
