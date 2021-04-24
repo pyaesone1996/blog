@@ -18,7 +18,6 @@
 
     <header id="app" class="sticky-top">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar">
-
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ $setting->site_title }}
@@ -84,21 +83,21 @@
                 </div>
             </div>
         </nav>
+
     </header>
 
-
-    <main class="my-5">
+    <main class="my-4" style="min-height:620px">
         @yield('content')
     </main>
 
-
-
-    <footer class="bg-white py-4 shadow-sm">
+    <footer class="bg-white shadow py-4 shadow-sm">
         <p class="text-center mb-0">{{ $setting->footer_information }}</p>
+
     </footer>
     <script src="http://unpkg.com/turbolinks"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('script')
+
 </body>
 
 </html>

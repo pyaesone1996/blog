@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-<section id="wrapper">
+<section id="wrapper" class="mt-n5">
     <div class="login-register" style="background-image:url({{ asset('/dashboards/assets/images/background/login-register.jpg') }});">
 
         <div class="login-box card">

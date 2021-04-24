@@ -6,9 +6,10 @@
 
 @section('content')
 
-<div class="author-banner" style="background-image:url({{$author->avatar}});">
+<div class="author-banner mt-n5" style="background-image:url({{$author->avatar}});">
     @include('authors.banner')
 </div>
+
 <div class="col-6 mx-auto mt-5">
     <img src="{{ $author->avatar }}" class="rounded-circle mx-auto d-block aboutauthor-profile" alt="">
     <div class="bg-white p-3 rounded-lg author-content">

@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 
-<div class="author_banner" style="background-image:url({{$author->avatar}});">
+<div class="author_banner mt-n5" style="background-image:url({{$author->avatar}});">
     @include('authors.banner')
 </div>
 <div class="container-fluid">

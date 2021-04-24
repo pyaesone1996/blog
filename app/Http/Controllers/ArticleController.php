@@ -14,7 +14,7 @@ class ArticleController extends Controller
     {
         $this->middleware('auth')->except(['index', 'detail']);
     }
-
+    
     public function index()
     {
         if (request('category')) {

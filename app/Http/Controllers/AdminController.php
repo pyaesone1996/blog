@@ -119,14 +119,12 @@ class AdminController extends Controller
         } else {
             //Create Directory to save image there
             File::exists($path) or File::makeDirectory($path);
-
+            $profile_name = time() . Str::slug($profile->getClientOriginalName());
             //Crop the image and Save existing directory
-            Image::make($profile)->crop(400, 400)->save($path . $profile->getClientOriginalName());
+            Image::make($profile)->crop(400, 400)->save($path . $profile_name);
 
-            //Get original name and save original file
-            $profile_name = $profile->getClientOriginalName();
+            //save original file
             $profile->storeAs('public/', $profile_name);
-            $profile_name = $profile_name;
         }
 
         $user->name = $request->name;

@@ -3,10 +3,8 @@
 <link href="{{ asset('dashboards/dist/css/pages/login-register-lock.css') }}" rel="stylesheet">
 <link href="{{ asset('dashboards/dist/css/style.min.css') }}" rel="stylesheet">
 @endsection
-
 @section('content')
-
-<section id="wrapper">
+<section id="wrapper" class="mt-n5">
     <div class="login-register" style="background-image:url({{ asset('dashboards/assets/images/background/login-register.jpg') }});">
         <div class="login-box card">
             <div class="card-body">
@@ -41,16 +39,13 @@
                         <div class="col-md-12">
                             <div class="d-flex no-block align-items-center">
                                 <div class="custom-control custom-checkbox">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input {{ old('remember') ? "checked" : " " }} class="form-check-input" type="checkbox" name="remember" id="remember">
                                     <label class="form-check-label" for="remember"> Remember Me </label>
                                 </div>
                                 <div class="ml-auto">
                                     <a class="btn btn-link text-muted" href="javascript:void(0)" id="to-recover">
                                         <i class="fas fa-lock m-r-5"></i> Forgot pwd?
                                     </a>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -102,7 +97,6 @@
                         </div>
                     </div>
                     <a href="{{ url()->previous() }}" class="text-right text-muted d-block">Back ?</a>
-
                 </form>
             </div>
         </div>

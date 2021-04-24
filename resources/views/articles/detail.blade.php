@@ -2,6 +2,7 @@
 @section('style')
 <link rel="stylesheet" href="{{ asset('/../../../dashboards/assets/icons/font-awesome/css/all.css') }}">
 @endsection
+
 @section('content')
 <div class="container">
     <div class="card mb-2">
@@ -74,7 +75,7 @@
         </div>
     </div>
 
-    @if(count($article->comments)>0)
+    @if(Auth::check())
     <div class="row">
         <div class="col-12">
             @foreach ($article->comments as $comment)

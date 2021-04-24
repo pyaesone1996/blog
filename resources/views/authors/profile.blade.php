@@ -4,13 +4,19 @@
             <h4 class="card-title m-t-10">{{ $author->name }}</h4>
             <h6 class="card-subtitle">{{ $author->username }}</h6>
             <div class="row text-center justify-content-md-center">
-                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i>
-                        <font class="font-medium">254</font>
+                <div class="col-4"><a href="{{ '@'.$author->username.'/following' }}" class="link text-decoration-none"><i class="icon-people"></i>
+                        <font class="font-medium">{{ count($author->follows) }}</font>
                     </a>
                 </div>
-                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i>
-                        @foreach ( $articles as $article ) @endforeach
-                        <span class="font-medium">{{ count($articles) }}</span>
+                <div class="col-4">
+                    <a href="{{ url('/?author='.$author->id) }}" class="link text-decoration-none"><i class="mdi mdi-receipt"></i>
+                        @php $count =0; @endphp
+                        @foreach ( $articles as $article )
+                        @if ($article->author_id == $author->id)
+                        @php $count++; @endphp
+                        @endif
+                        @endforeach
+                        <span class="font-medium">{{ $count }}</span>
                     </a>
                 </div>
             </div>
