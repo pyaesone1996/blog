@@ -11,6 +11,5 @@ $factory->define(Article::class, function (Faker $faker) {
         'title' => $faker->sentence,
         'excerpt' => $faker->sentence,
         'body' => $faker->text,
-        'featured_image' => 'noimage.jpg',
     ];
 });
