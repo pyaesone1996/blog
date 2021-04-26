@@ -9,7 +9,7 @@
         <div class="card-body">
             @if($article->featured_image)
             <div class="d-block mb-4">
-                <img src="{{ $article->getFeaturedImage() }}" alt="">
+                <img src="{{ $article->getFeaturedImage() }}" alt="" class="img-fluid">
             </div>
             @endif
 
@@ -35,6 +35,7 @@
                 {{ $article->body }}
             </p>
             <div class="d-flex justify-content-start">
+
                 <form action="/admin/articles/{{ $article->id }}/like" method="POST">
                     @csrf
                     @if(Auth::check())
@@ -47,6 +48,7 @@
                     </button>
 
                 </form>
+
                 <form action="/admin/articles/{{ $article->id }}/like" method="POST">
                     @csrf
                     @method('DELETE')
@@ -60,6 +62,7 @@
                     </button>
 
                 </form>
+
                 <div class="mt-2 ml-auto justify-content-end">
                     @if(current_user())
                     @if(current_user()->is($article->author))
@@ -80,14 +83,17 @@
         <div class="col-12">
             @foreach ($article->comments as $comment)
             <div class="border border-info p-3  {{ $loop->last ? '' : 'mb-4' }}  rounded-lg ">
+
                 <p class="">{{ $comment->content }}</p>
+
                 <div class="small">
                     By <b>{{ $comment->user->name }}</b>,
                     {{ $comment->created_at->diffForHumans() }}
                 </div>
-                @if(current_user()->hasRole('Admin') || current_user()->is($article->author) )
+
+                @if(current_user()->hasRole('Admin') || Auth::id()==($comment->user_id) )
                 <div class="mt-3">
-                    @if(current_user()->is($article->author))
+                    @if(Auth::id()==($comment->user_id))
                     <a href="{{ url('comment/edit/'.$comment->id) }}" data-toggle="modal" data-target="#comment{{$comment->id}}" class="text-primary">Edit &plus; </a>
                     @endif
                     <a href="{{ url('articles/comment/delete/'.$comment->id) }}" class="text-danger">Delete &cross;</a>
@@ -160,6 +166,4 @@
     </div>
 
 </div>
-
-
 @endsection

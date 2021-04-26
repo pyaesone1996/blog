@@ -10,42 +10,46 @@
     @include('authors.banner')
 </div>
 
-<div class="col-6 mx-auto mt-5">
+<div class="col-md-6 mx-auto mt-5 col-xs-12">
+
     <img src="{{ $author->avatar }}" class="rounded-circle mx-auto d-block aboutauthor-profile" alt="">
     <div class="bg-white p-3 rounded-lg author-content">
         <h3 class="font-medium mb-4">About {{ $author->username }}</h3>
         <p class="">{{ $author->biography }}</p>
         <hr>
-        <div class="row">
-            <div class="col-md-3 col-xs-6 b-r"> <strong>Full Name</strong>
+        <div class="d-flex text-break justify-content-md-between">
+            <div class="b-r"> <strong>Full Name</strong>
                 <br>
                 <p class="text-muted">{{ $author->name }}</p>
             </div>
-            <div class="col-md-3 col-xs-6 b-r"> <strong>Mobile</strong>
+            <div class="b-r"> <strong>Mobile</strong>
                 <br>
                 <p class="text-muted">{{ $author->phone }}</p>
             </div>
-            <div class="col-md-3 col-xs-6 b-r"> <strong>Email</strong>
+            <div class="b-r"> <strong>Email</strong>
                 <br>
                 <p class="text-muted">{{ $author->email }}</p>
             </div>
-            <div class="col-md-3 col-xs-6"> <strong>Joined</strong>
+            <div class="b-r"><strong>Joined</strong>
                 <br>
                 <p class="text-muted">{{ $author->created_at->format('M/Y') }}</p>
             </div>
         </div>
 
-    </div>
-    <a href="{{ url('/@'.$author->username) }}" class="
+        <a href="{{ url('/@'.$author->username) }}" class="
                    text-danger
                    text-decoration-none 
-                   mx-1 mt-3
+                   mx-1 mt-2
                    d-block
                    align-self-end
                    text-right
         ">
-        <i class="mdi mdi-arrow-top-left"></i> Back
-    </a>
+            <i class="mdi mdi-arrow-top-left"></i> Back
+        </a>
+
+    </div>
+
+
 
 </div>
 

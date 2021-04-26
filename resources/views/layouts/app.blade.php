@@ -13,7 +13,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mycustom.css') }}" rel="stylesheet">
 </head>
-
 <body>
 
     <header id="app" class="sticky-top">
@@ -41,7 +40,7 @@
                     </ul>
 
                     <div class="navbar-nav mr-3">
-                        <form class="form-inline my-2 my-lg-0 app-search" method="GET" action="search">
+                        <form class="form-inline my-2 my-lg-0 app-search" method="GET" action="/search">
                             <input class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search & Enter" name="q">
                         </form>
                     </div>
@@ -66,7 +65,8 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right mt-3" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url('admin') }}">Dashboard</a>
-                                <a class="dropdown-item" href="{{ url('/@'.Auth::user()->username) }}">Profile</a>
+                                <a class="dropdown-item" href="{{ url('/@'.Auth::user()->username) }}">Timeline</a>
+                                <a class="dropdown-item" href="{{ url('admin/user/detail/'.Auth::id().'/#settings') }}">Update Profile</a>
                                 <a class="dropdown-item" href="{{ url('/admin/articles/create') }}">Create Article</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -94,6 +94,7 @@
         <p class="text-center mb-0">{{ $setting->footer_information }}</p>
 
     </footer>
+
     <script src="http://unpkg.com/turbolinks"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('script')

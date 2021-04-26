@@ -255,12 +255,7 @@ class AdminController extends Controller
 
         $category = new Category;
         $category->category_name = $request->category_name;
-        if ($request->slug) {
-            $url = $request->slug;
-        } else {
-            $url = $request->category_name;
-        }
-        $category->slug = Str::slug($url, '-');
+        $category->slug = request('slug') ? Str::slug(request('slug'), '-') : Str::slug(request('category_name'), '-');
         $category->save();
 
         return back()->with('msg', 'Your Data Is Added!');
@@ -270,7 +265,7 @@ class AdminController extends Controller
     {
         $category = Category::find($id);
         $category->category_name = request('category_name');
-        $category->slug = Str::slug(request('slug'), '-');
+        $category->slug = request('slug') ? Str::slug(request('slug'), '-') : Str::slug(request('category_name'), '-');
         $category->description = request('description');
         $category->save();
 

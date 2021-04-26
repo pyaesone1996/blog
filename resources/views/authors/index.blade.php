@@ -53,7 +53,7 @@
                                 </form>
                                 @else
                                 <div class="text-right">
-                                    <a href="{{ url('admin/user/detail/'.$author->id) }}" class="text-decoration-none bg-info text-white rounded-pill py-2 px-3">Edit Profile</a>
+                                    <a href="{{ url('admin/user/detail/'.$author->id) }}" class="text-decoration-none btn btn-info text-white rounded-pill px-3 py-1">Edit Profile</a>
                                 </div>
                                 @endif
                                 @else

@@ -67,7 +67,9 @@
                                 <!-- text-->
                                 <a href="{{ route('admin.users.detail',['id' => Auth::id()] ) }}" class="dropdown-item"><i class="ti-user"></i> My
                                     Profile</a>
-
+                                <a class="dropdown-item" href="{{ url('admin') }}">Dashboard</a>
+                                <a class="dropdown-item" href="{{ url('/@'.Auth::user()->username) }}">Timeline</a>
+                                <a class="dropdown-item" href="{{ url('/admin/articles/create') }}">Create Article</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
                                     <i class="fa fa-power-off"></i> Logout

@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'username' => $faker->unique()->name,
+        'username' => str_replace(' ', '_', $faker->name),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
@@ -29,7 +29,7 @@ $factory->define(User::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'date_of_birth' => $faker->date(),
         'description' => $faker->paragraph(),
-        'biography' => $faker->text(),
-        'profile' => $faker->noimage,
+        'biography' => $faker->paragraph(),
+        'profile' => 'noimage.jpg',
     ];
 });

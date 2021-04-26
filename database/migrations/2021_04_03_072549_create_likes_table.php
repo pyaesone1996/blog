@@ -26,7 +26,7 @@ class CreateLikesTable extends Migration
             ->constrained()
             ->onDelete('cascade');
 
-            $table->boolean('liked');
+            $table->boolean('liked')->nullable();
             $table->timestamps();
 
             $table->unique(['user_id', 'article_id']);

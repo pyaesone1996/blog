@@ -1,15 +1,12 @@
 <?php
 
-use App\Like;
-use App\User;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Search Route
 Route::get('/search', function () {
     $query = request('q');
-    $repo = App::make('App\Repositories\ArticlesRepository');
+    $repo = app()->make('App\Repositories\ArticlesRepository');
     $articles = $query
                 ? $repo->search($query)
                 : $repo::getAll();
@@ -36,20 +33,17 @@ Route::get('/comment/edit/{id}', 'CommentController@edit');
 Route::put('/comment/edit/{id}', 'CommentController@update');
 Route::get('/articles/comment/delete/{id}', 'CommentController@delete');
 
-//Member Route
+//Member,Author Route
 Route::get('/authors', 'AuthorController@index')->name('authors');
 Route::post('/authors', 'AuthorController@store');
 Route::get('/authors/create', 'AuthorController@create');
 Route::get('/@{author}', 'AuthorController@show')->name('author.detail');
+//About page For Author
 Route::get('/@{name}/about', function ($name) {
-    $repo = App::make('App\Repositories\AuthorsRepository');
+    $repo = app()->make('App\Repositories\AuthorsRepository');
     $author = $repo->aboutAuthor($name);
     return view('authors.about', compact('author'));
 });
-
-Route::get('/authors/edit/{id}', 'AuthorController@edit');
-Route::put('/authors/edit/{id}', 'AuthorController@update');
-Route::get('/authors/delete/{id}', 'AuthorController@delete');
 
 Route::prefix('admin')->group(function () {
     //User
@@ -83,13 +77,13 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    //Follow //Unfollow
     Route::post('/@{user:username}/follow', 'FollowsController@store');
     Route::get('/@{user:username}/following', 'FollowsController@following');
 
+    //Setting
     Route::get('/settings', 'SettingsController@index');
     Route::patch('/settings/{settings}', 'SettingsController@update');
 });
 
 Auth::routes();
-// Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/admin', 'HomeController@index')->name('home');

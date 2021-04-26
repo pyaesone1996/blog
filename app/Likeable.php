@@ -29,6 +29,14 @@ trait Likeable
         );
     }
 
+    // public function toggledislike($user = null)
+    // {
+    //     if ($this->likes()->where('liked', 0)) {
+    //         return $this->like($user, 'NULL');
+    //     }
+    //     return $this->like($user, false);
+    // }
+
     public function dislike($user = null)
     {
         return $this->like($user, false);
@@ -48,4 +56,9 @@ trait Likeable
     {
         return $this->hasMany(Like::class);
     }
+
+    // public function toggleLike(User $user)
+    // {
+    //     return $this->like()->save($user);
+    // }
 }

@@ -14,6 +14,7 @@
 </style>
 
 @endsection
+
 @section('dashboard')
 
 <div class="container-fluid">
@@ -28,14 +29,14 @@
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                     <li class="breadcrumb-item active">New Categories </li>
                 </ol>
-                <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i>
-                    Create Category</button>
             </div>
         </div>
     </div>
 
     <div class="row">
+
         <div class="col-lg-4">
+
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Create New Category</h4>
@@ -64,11 +65,15 @@
 
                 </div>
             </div>
+
         </div>
+
         <div class="col-lg-8">
+
             <div class="card">
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
+
                         <tbody>
                             <tr>
                                 <th>No</th>
@@ -78,7 +83,9 @@
                                 <th>Count</th>
 
                             </tr>
+
                             @foreach ($categories as$key => $category)
+
                             <div id="verticalcenter{{ $category->id }}" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -134,8 +141,11 @@
                             </tr>
 
                             @endforeach
+
                         </tbody>
+
                     </table>
+
                     <div class="d-flex">
                         <p>{{ $categories->links() }}</p>
                         <p class="text-muted float-right ml-auto">Total Categories: {{ count($categories) }}</p>
@@ -143,8 +153,11 @@
 
                 </div>
             </div>
+
         </div>
+
     </div>
+
 </div>
 
 
