@@ -63,11 +63,6 @@ class User extends Authenticatable
         return false;
     }
 
-    public function getRole()
-    {
-        return $this->first()->roles->first()->name;
-    }
-
     public function timeline()
     {
         if (auth()->user() == $this) {

@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ $setting->site_description }}">
-    <meta name="PowerBy" content="https://www.thecalmtech.com">
+    <meta name="powerby" content="https://www.thecalmtech.com">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/storage').'/'.$setting->site_icon }}">
     <title>{{ $setting->site_title }} | {{$setting->site_tagline }}</title>
-    @yield('style')
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboards/dist/css/style.min.css') }}" rel="stylesheet">
+    @yield('style')
 </head>
 
 <body class="skin-blue fixed-layout">
@@ -64,7 +65,7 @@
                         <li class="nav-item dropdown u-pro">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->username.'-image' }}" class="img-circle" height="30"> <span class="hidden-md-down">{{ Auth::user()->username }}&nbsp;<i class="fa fa-angle-down"></i></span> </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
-                                <!-- text-->
+
                                 <a href="{{ route('admin.users.detail',['id' => Auth::id()] ) }}" class="dropdown-item"><i class="ti-user"></i> My
                                     Profile</a>
                                 <a class="dropdown-item" href="{{ url('admin') }}">Dashboard</a>
@@ -75,25 +76,11 @@
                                     <i class="fa fa-power-off"></i> Logout
                                 </a>
 
-                                <!-- text-->
-                                {{-- <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My
-                                    Balance</a>
-                                <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-                                <!-- text-->
-                                <div class="dropdown-divider"></div>
-                                <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account
-                                    Setting</a> --}}
-                                <!-- text-->
-                                {{-- <div class="dropdown-divider"></div> --}}
-                                <!-- text-->
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
 
-                                <!-- text-->
+
                             </div>
                         </li>
                         <!-- ============================================================== -->
@@ -225,6 +212,7 @@
     <script src="{{ asset('dashboards/dist/js/sidebarmenu.js') }}"></script>
     <script src="{{ asset('dashboards/dist/js/custom.min.js') }}"></script>
 
+    @yield('script')
     <script>
         $(document).ready(function() {
             $('.logoimg').hide();
@@ -236,7 +224,6 @@
         }
 
     </script>
-    @yield('script')
 
 </body>
 

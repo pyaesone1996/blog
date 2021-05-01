@@ -39,15 +39,18 @@
                                 <td>{{ $user->phone }}</td>
                                 <td>
 
-                                    @if ( $user->roles->pluck('name')->contains('Admin') )
-                                    <span class="label label-danger">Admin<span>
-                                            @elseif ( $user->roles->pluck('name')->contains('Member') )
-                                            <span class="label label-warning">Member<span>
-                                                    @elseif ( $user->roles->pluck('name')->contains('User') )
-                                                    <span class="label label-primary">User<span>
-                                                            @else
-                                                            <span class="label label-success">User<span>
-                                                                    @endif
+                                    <span class="badge  badge-pill 
+                                        @foreach ($roles as $role) 
+                                        {{ $user->hasRole('Admin') ? 'badge-danger' : 
+                                        ($user->hasRole('Member') ? 'badge-warning text-white' : 'badge-success text-white' ) }}
+                                        @endforeach ">
+
+                                        @foreach ($roles as $role)
+                                        {{ $user->roles->pluck('name')->contains($role->name) == $role->name ? $role->name : ''  }}
+                                        @endforeach
+
+                                    </span>
+
                                 </td>
                                 <td>{{ $user->getAge($user->date_of_birth) }}</td>
                                 <td>

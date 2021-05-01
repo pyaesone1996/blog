@@ -1,6 +1,25 @@
 @extends('layouts.dashboard')
 @section('style')
 <link href="{{ asset('/dashboards/assets/node_modules/css-chart/css-chart.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('dashboards/assets/node_modules/css-chart/css-chart.css') }}">
+<link rel="stylesheet" href="{{ asset('dashboards/dist/css/pages/easy-pie-chart.css') }}">
+<style>
+    p.icon-css {
+        top: 50%;
+        left: 50%;
+        font-size: 32px;
+        color: #A6B7BF;
+        transform: translate(-15px, -24px);
+        position: absolute;
+    }
+
+    .chart {
+        position: relative;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+</style>
 @endsection
 
 @section('dashboard')
@@ -23,20 +42,20 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mb-4">
 
         <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row p-t-10 p-b-10">
-                        <!-- Column -->
-                        <div class="col p-r-0">
-                            <h1 class="font-light">{{ count($reg_users) }}</h1>
-                            <h6 class="text-muted">Total User</h6>
-                        </div>
-                        <!-- Column -->
-                        <div class="col text-right align-self-center">
-                            <div data-label="20%" class="css-bar m-b-0 css-bar-success css-bar-20"><i class="mdi mdi-account-circle"></i></div>
+            <div class="bg-white py-2 px-3">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="font-light mt-sm-3">{{ count($reg_users) + count($authors) + count($admins)  }}</h1>
+                        <h6 class="text-dark">Total User</h6>
+                    </div>
+                    <div class="col text-right align-self-center">
+                        <div class="chart easy-pie-chart-6" data-percent="{{ count($reg_users) }}">
+                            <p class="icon-css">
+                                <i class="mdi mdi-account-circle"></i>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -44,56 +63,59 @@
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row p-t-10 p-b-10">
-                        <!-- Column -->
-                        <div class="col p-r-0">
-                            <h1 class="font-light">{{ count($authors) }}</h1>
-                            <h6 class="text-muted">Total Author</h6>
-                        </div>
-                        <!-- Column -->
-                        <div class="col text-right align-self-center">
-                            <div data-label="30%" class="css-bar m-b-0 css-bar-warning css-bar-20"><i class="mdi mdi-briefcase-check"></i></div>
+            <div class="bg-white py-2 px-3">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="font-light mt-sm-3">{{ count($authors) }}</h1>
+                        <h6 class="text-dark">Total Author</h6>
+                    </div>
+                    <div class="col text-right align-self-center">
+                        <div class="chart easy-pie-chart-4" data-percent="{{ count($authors) }}">
+                            <p class="icon-css">
+                                <i class="mdi mdi-briefcase-check"></i>
+                            </p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row p-t-10 p-b-10">
-                        <!-- Column -->
-                        <div class="col p-r-0">
-                            <h1 class="font-light">{{ count($reg_users) + count($authors) }}</h1>
-                            <h6 class="text-muted">Total Registration</h6>
-                        </div>
-                        <!-- Column -->
-                        <div class="col text-right align-self-center">
-                            <div data-label="40%" class="css-bar m-b-0 css-bar-primary css-bar-40"><i class="mdi mdi-star-circle"></i></div>
+            <div class="bg-white py-2 px-3">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="font-light mt-sm-3">{{ count($reg_users) + count($authors) }}</h1>
+                        <h6 class="text-dark text-break">Total Registration</h6>
+                    </div>
+                    <div class="col text-right align-self-center">
+                        <div class="chart easy-pie-chart-6" data-percent="{{ count($authors) }}">
+                            <p class="icon-css">
+                                <i class="mdi mdi-star-circle"></i>
+                            </p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row p-t-10 p-b-10">
-                        <!-- Column -->
-                        <div class="col p-r-0">
-                            <h1 class="font-light">{{ count($articles) }}</h1>
-                            <h6 class="text-muted">Total Article</h6>
-                        </div>
-                        <!-- Column -->
-                        <div class="col text-right align-self-center">
-                            <div data-label="60%" class="css-bar m-b-0 css-bar-info css-bar-{{ (124/4)-1  }}"><i class="mdi mdi-receipt"></i></div>
+            <div class="bg-white py-2 px-3">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="font-light mt-sm-3">{{ count($articles) }}</h1>
+                        <h6 class="text-dark">Total Article</h6>
+                    </div>
+                    <div class="col text-right align-self-center">
+                        <div class="chart easy-pie-chart-5" data-percent="{{ count($articles) }}">
+                            <p class="icon-css">
+                                <i class="mdi mdi-receipt"></i>
+                            </p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -104,15 +126,18 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
+
                     @if(Auth::user()->hasRole('Admin'))
                     <h5 class="card-title">Recent Articles</h5>
                     @else
                     <h5 class="card-title">Your Latest Articles</h5>
                     @endif
+
                 </div>
 
                 <div class="comment-widgets" id="comment" style="height: 629px;position: relative;">
-                    @if(Auth::user()->hasRole('Admin')):
+
+                    @if(Auth::user()->hasRole('Admin'))
 
                     @foreach ($articles as $article)
                     <div class="d-flex no-block comment-row">
@@ -139,9 +164,9 @@
                         <div class="p-2"><span class="round"><img src="{{ $article->author->avatar }}" alt="{{ $article->author->name .'-image' }}" width="50"></span></div>
                         <div class="comment-text w-100">
                             <h5 class="font-medium">{{ $article->title }}</h5>
-                            <p class="m-b-10 text-muted">{{ $article->body }}</p>
+                            <p class="m-b-10 text-dark">{{ $article->body }}</p>
                             <div class="comment-footer">
-                                <span class="text-muted pull-right">{{ $article->created_at->format('M d, Y') }}</span> <span class="action-icons">
+                                <span class="text-dark pull-right">{{ $article->created_at->format('M d, Y') }}</span> <span class="action-icons">
                                     <a target="_blank" href="{{ url('articles/detail/'.$article->id) }}"><span class="badge badge-pill badge-info">View</span> </a>
 
 
@@ -161,6 +186,7 @@
         </div>
 
         @if(Auth::user()->hasRole('Admin'))
+
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
@@ -201,18 +227,22 @@
                             <tr>
                                 <td class="text-center">{{ $key+1 }}</td>
                                 <td class="txt-oflo">{{ $user->name }}</td>
-                                <td><span class="badge  badge-pill 
+                                <td>
 
-                                    @foreach ($roles as $role) 
-                                    {{ $user->hasRole('Admin') ? 'badge-danger' : 
-                                    ($user->hasRole('Author') ? 'badge-warning text-white' : 'badge-success text-white' ) }}
-                                    @endforeach ">
+                                    <span class="badge  badge-pill 
+                                    
+                                        @foreach ($roles as $role) 
+                                        {{ $user->hasRole('Admin') ? 'badge-danger' : 
+                                        ($user->hasRole('Member') ? 'badge-warning text-white' : 'badge-success text-white' ) }}
+                                        @endforeach ">
 
                                         @foreach ($roles as $role)
-                                        {{ $user->roles->pluck('label')->contains($role->label) == $role->label ? $role->label : ''  }}
+                                        {{ $user->roles->pluck('name')->contains($role->name) == $role->name ? $role->name : ''  }}
                                         @endforeach
 
-                                    </span></td>
+                                    </span>
+
+                                </td>
 
                                 <td class="txt-oflo">{{ $user->created_at->format('d M Y') }}</td>
 
@@ -233,7 +263,9 @@
                 </div>
             </div>
         </div>
+
         @else
+
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
@@ -261,11 +293,11 @@
                                                 <span class="badge  badge-pill 
                                                     @foreach ($roles as $role) 
                                                     {{ $user->hasRole('Admin') ? 'badge-danger' : 
-                                                    ($user->hasRole('Author') ? 'badge-warning text-white' : 'badge-success text-white' ) }}
+                                                    ($user->hasRole('Member') ? 'badge-warning text-white' : 'badge-success text-white' ) }}
                                                     @endforeach ">
 
                                                     @foreach ($roles as $role)
-                                                    {{ $user->roles->pluck('label')->contains($role->label) == $role->label ? $role->label : ''  }}
+                                                    {{ $user->roles->pluck('name')->contains($role->name) == $role->name ? $role->name : ''  }}
                                                     @endforeach
 
                                                 </span>
@@ -298,6 +330,7 @@
 
             </div>
         </div>
+
         @endif
 
     </div>
@@ -321,4 +354,8 @@
 <!-- Chart JS -->
 <script src="{{ asset('dashboards/dist/js/dashboard1.js') }}"></script>
 <script src="{{ asset('dashboards/assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
+
+<script src="{{ asset('dashboards/assets/node_modules/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js') }}"></script>
+<script src="{{ asset('dashboards/assets/node_modules/jquery.easy-pie-chart/easy-pie-chart.init.js') }}"></script>
+
 @endsection

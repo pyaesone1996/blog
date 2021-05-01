@@ -9,8 +9,7 @@ Route::get('/search', function () {
     $repo = app()->make('App\Repositories\ArticlesRepository');
     $articles = $query
                 ? $repo->search($query)
-                : $repo::getAll();
-
+                : $repo->getAll();
     return view('articles.index', compact('articles'));
 });
 
@@ -38,6 +37,7 @@ Route::get('/authors', 'AuthorController@index')->name('authors');
 Route::post('/authors', 'AuthorController@store');
 Route::get('/authors/create', 'AuthorController@create');
 Route::get('/@{author}', 'AuthorController@show')->name('author.detail');
+
 //About page For Author
 Route::get('/@{name}/about', function ($name) {
     $repo = app()->make('App\Repositories\AuthorsRepository');
@@ -66,6 +66,7 @@ Route::prefix('admin')->group(function () {
 
     //Like - Disklie
     Route::post('/articles/{article}/like', 'LikeController@store');
+    Route::delete('/articles/{article}/removelike', 'LikeController@removeLike');
     Route::delete('/articles/{article}/like', 'LikeController@destroy');
 
     //Category

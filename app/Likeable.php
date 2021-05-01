@@ -48,9 +48,4 @@ trait Likeable
     {
         return $this->hasMany(Like::class);
     }
-
-    // public function toggleLike(User $user)
-    // {
-    //     return $this->like()->save($user);
-    // }
 }

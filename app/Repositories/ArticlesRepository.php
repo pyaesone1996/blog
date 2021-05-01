@@ -16,6 +16,6 @@ class ArticlesRepository
 
     public function getAll()
     {
-        Article::latest()->withlikes()->paginate(15);
+        return Article::latest()->withlikes()->paginate(15);
     }
 }
