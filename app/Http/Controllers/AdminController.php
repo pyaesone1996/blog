@@ -188,7 +188,7 @@ class AdminController extends Controller
         $articles->title = $request->title;
         $articles->excerpt = $request->excerpt;
         $articles->body = $request->body;
-        $articles->featured_image = $featured_image_name;
+        $articles->featured_image = $request->file('featured_image') ? $featured_image_name : null;
         $articles->save();
 
         $articles->categories()->attach(request('categories'));

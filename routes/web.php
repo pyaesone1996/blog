@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/search', function () {
     $query = request('q');
     $repo = app()->make('App\Repositories\ArticlesRepository');
-    $articles = $query
-                ? $repo->search($query)
-                : $repo->getAll();
+    $articles = $query ? $repo->search($query) : $repo->getAll();
     return view('articles.index', compact('articles'));
 });
 

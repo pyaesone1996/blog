@@ -246,7 +246,8 @@
 
                                 <td class="txt-oflo">{{ $user->created_at->format('d M Y') }}</td>
 
-                                <td><span class="text-success">
+                                <td>
+                                    <span class="text-success">
                                         @php $count = 0; @endphp
                                         @foreach ($articles as $article)
                                         @if ( $user->id == $article->author_id)

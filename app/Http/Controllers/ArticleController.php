@@ -22,6 +22,7 @@ class ArticleController extends Controller
             foreach ($categories as $category) : $article_id[] = $category->id;
             endforeach;
             $articles = Article::whereIn('id', $article_id)->withlikes()->paginate(15);
+            $articles = Article::whereIn('id', $article_id)->withlikes()->paginate(15);
         } elseif (request('author')) {
             $articles = Article::where('author_id', request('author'))->withlikes()->paginate(15);
         } else {
