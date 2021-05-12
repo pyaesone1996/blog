@@ -22,6 +22,11 @@ This Blog Platform Application is my first project using laravel framework and a
 6. run command php artisan migrate --seed
 7. run command php artisan storage:link
 
+## Admin Login
+
+-   Email : admin@gmaill.com
+-   Password : password
+
 ## Using
 
 -   Admin Dashboard UI
