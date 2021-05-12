@@ -14,11 +14,13 @@ This Blog Platform Application is my first project using laravel framework and a
 
 ## Todo
 
-1. create database first
-2. join database at .env file
-3. run command php artisan key:generate
-4. run command php artisan migrate --seed
-5. run command php artisan storage:link
+1. git clone https://github.com/pyaesone1996/blog.git
+2. composer install
+3. create database
+4. join database at .env file
+5. run command php artisan key:generate
+6. run command php artisan migrate --seed
+7. run command php artisan storage:link
 
 ## Using
 
