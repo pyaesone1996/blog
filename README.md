@@ -1,6 +1,6 @@
 ## Blog Platform Application
 
-This Blog Platform Application is a my first project of using laravel framework with using admin-dashboard UI. I believe this project will be an usefulable and supportive for newbie learner. I create this blog project,inspired from medium ,this project on going and not complete yet , i will upgrading soon. Please test my application , reveiw and discuss me .Thanks
+This Blog Platform Application is my first project using laravel framework and admin-dashboard UI. I believe this project will be useful and supportive for newbie learners. I created this blog project,inspired from medium ,this project is ongoing and not complete yet , i will upgrade soon. Please test my application , review and discuss me .Thanks
 
 ## Feature
 
