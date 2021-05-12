@@ -1,16 +1,33 @@
-## About Laravel
+## Blog Platform Application
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This Blog Platform Application is a my first project of using laravel framework with using admin-dashboard UI. I believe this project will be an usefulable and supportive for newbie learner. I create this blog project,inspired from medium ,this project on going and not complete yet , i will upgrading soon. Please test my application , reveiw and discuss me .Thanks
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Feature
 
+-   User registration with role level
+-   Author can post and CRUD with their posted
+-   Author's dashboard and timeline
+-   User follow and unfollow feature
+-   User can react like or dislike author's post.
+-   Admin Dashboard
+-   Admin can manage user but can not edit user info.
+
+## Todo
+
+1. create database first
+2. join database at .env file
+3. run command php artisan key:generate
+4. run command php artisan migrate --seed
+5. run command php artisan storage:link
+
+## Using
+
+-   Admin Dashboard UI
+-   Bootstrap
+-   FontAwesome
+-   jQuery
+-   Chart-Js
+-   PHP
+-   MySQL
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
