@@ -108,7 +108,7 @@ class AdminController extends Controller
             'username' => 'alpha_dash'
         ]);
         $user = User::findOrFail($id);
-        abort_if($user->isNot(current_user()), 404) ;
+        abort_if($user->isNot(current_user()), 404);
         //Get Image File And Create Location Where To Save
         $profile = $request->file('profile');
 
@@ -217,7 +217,7 @@ class AdminController extends Controller
             Image::make($featured_image)->crop(900, 700)->save($crop_path . $featured_image_name);
             $featured_image->storeAs('public/', $featured_image_name);
         } else {
-            $featured_image_name = $article->featured_image ;
+            $featured_image_name = $article->featured_image;
         }
 
         $article->title = $request->title;

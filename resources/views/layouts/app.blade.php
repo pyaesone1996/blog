@@ -86,7 +86,7 @@
 
     </header>
 
-    <main class="my-4" style="min-height:620px">
+    <main class="my-4 wrapper" style="min-height:620px">
         @yield('content')
     </main>
 
